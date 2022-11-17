@@ -14,29 +14,37 @@
 <body>
     <div id="header">
         <img class="logo" src="https://cdn.autodesk.io/logo/black/stacked.png" alt="Autodesk Platform Services">
-        <span class="title">AEC CIM Explorer Sample</span>
-        <button id="login" style="visibility: hidden;">Login</button>
+        <span class="title">AEC CIM Explorer Samples</span>
     </div>
     <div id="sidebar">
-        <div>
-            Step 1: List hubs on your account<br/>
-            <button type="button" class="btn btn-primary" id="getHubs">List Hubs</button>
-        </div>
-        <hr/>
-        <div>
-            Step 2: List project for a hub
-            <div class="mb-3">
-                <input type="text" class="form-control" id="hubId" placeholder="HubId - e.g. b.768cae14-76b3-4531-9030-25212dab4e48">
-              </div>
-            <button type="button" class="btn btn-primary" id="getProjects">List Projects</button>
-        </div>
+
     </div>
     <div id="preview">
-        <pre><code id="jsonresult"></code></pre>
+        <div>
+            <h5>Design Validation Sample Workflow</h5>
+            Validating data property names, units and types ( used across designs in a project is a valuable QA/QC
+            process that can now be automated using the AEC CIM APIs. <br />
+            <a class="btn btn-primary" href="/1-DesignValidation">Go to sample</a>
+        </div>
+        <hr />
+        <div>
+            <h5>Quantity takeoff for Doors Sample Workflow</h5>
+            Let's take the sample model and imagine that you would like to build a quantity takeoff for
+            'Doors'. You will need to get all design entities filtered by classification 'Doors'. <br />
+            <a class="btn btn-primary" href="/2-QuantityTakeOff">Go to sample</a>
+        </div>
+        <hr />
+        <div>
+            <h5>Window Schedule Sample Workflow</h5>
+            A schedule is typically used to identify, in most cases a chart or table providing descriptions of the
+            windows , doors, finishes, lintels, footings, piers, etc. on a construction project. Let's take the same
+            sample model and imagine that you would like to build a window schedule. You will need to retrieve
+            properties like panel glazing, glass, frame material, height, width, etc. of all design entity instances of
+            category windows.<br />
+            <a class="btn btn-primary" href="/3-Schedule">Go to sample</a>
+        </div>
+        <hr />
     </div>
-    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js"></script>
-    <script src="/graphql.js" type="module"></script>
-    <script src="/main.js" type="module"></script>
 </body>
 
 </html>

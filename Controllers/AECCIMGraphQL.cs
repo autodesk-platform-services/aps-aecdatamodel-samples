@@ -11,19 +11,34 @@ using Newtonsoft.Json.Linq;
 
 [ApiController]
 [Route("api/graphql")]
-public class AECCIMGraphQL : ControllerBase
+public partial class AECCIMGraphQLController : ControllerBase
 {
-    private const string BASE_URL = "https://developer.api.autodesk.com/aeccloudinformationmodel/2022-11/graphql/v1/graph";
+    private const string BASE_URL = "https://developer.api.autodesk.com/aeccloudinformationmodel/2022-11/graphql";
     private static GraphQLHttpClient GraphQLClient;
     private readonly ILogger<AuthController> _logger;
     private readonly APS _aps;
 
-    public AECCIMGraphQL(ILogger<AuthController> logger, APS aps)
+    public AECCIMGraphQLController(ILogger<AuthController> logger, APS aps)
     {
         _logger = logger;
         _aps = aps;
 
         if (GraphQLClient == null) GraphQLClient = new GraphQLHttpClient(BASE_URL, new NewtonsoftJsonSerializer());
+    }
+
+    public async Task<ActionResult<string>> Query(GraphQLRequest query)
+    {
+        var tokens = await AuthController.PrepareTokens(Request, Response, _aps);
+        if (tokens == null)
+        {
+            return Unauthorized();
+        }
+
+        var client = new GraphQLHttpClient(BASE_URL, new NewtonsoftJsonSerializer());
+        client.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + tokens.InternalToken);
+        var response = await client.SendQueryAsync<object>(query);
+
+        return Ok(response.Data.ToString());
     }
 
     [HttpGet("hubs")]
@@ -32,7 +47,7 @@ public class AECCIMGraphQL : ControllerBase
         var hubs = new GraphQLRequest
         {
             Query = @"
-			    query GetHubs {
+			    query {
 			        hubs {
                         results {
                             id
@@ -51,7 +66,7 @@ public class AECCIMGraphQL : ControllerBase
         var hubs = new GraphQLRequest
         {
             Query = @"
-			    query GetProjects {
+			    query {
 			        projects (hubId: ""$hubId"") {
                         results {
                             id
@@ -64,18 +79,50 @@ public class AECCIMGraphQL : ControllerBase
         return await Query(hubs);
     }
 
-    public async Task<ActionResult<string>> Query(GraphQLRequest query)
+    [HttpGet("hubs/{hubid}/projects/{projectId}/designs")]
+    public async Task<ActionResult<string>> GetDesigns(string hubId, string projectId)
     {
-        var tokens = await AuthController.PrepareTokens(Request, Response, _aps);
-        if (tokens == null)
+        var properties = new GraphQLRequest
         {
-            return Unauthorized();
-        }
+            Query = @"
+                query GetDesigns {
+                project(
+                    hubId: ""$hubId""
+                    projectId: ""$projectId""
+                ) {
+                    id
+                    name
+                    folders {
+                    results {
+                        id
+                        name
+                        items {
+                        results {
+                            id
+                            name
+                            __typename
+                            ... on Folder {
+                            items {
+                                results {
+                                name
+                                id
+                                __typename
+                                extensionType
+                                ... on BasicFile {
+                                    designId
+                                    name
+                                }
+                                }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }".Replace("$hubId", hubId).Replace("$projectId", projectId),
+        };
 
-        var client = new GraphQLHttpClient(BASE_URL, new NewtonsoftJsonSerializer());
-        client.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + tokens.InternalToken);
-        var response = await client.SendQueryAsync<object>(query);
-
-        return Ok(response.Data.ToString());
+        return await Query(properties);
     }
 }

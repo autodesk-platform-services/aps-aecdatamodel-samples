@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="https://cdn.autodesk.io/favicon.ico">
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/main.css">
+    <title> AEC CIM GraphQL (BETA) - Autodesk Platform Services</title>
+</head>
+
+<body>
+    <div id="header">
+        <img class="logo" src="https://cdn.autodesk.io/logo/black/stacked.png" alt="Autodesk Platform Services">
+        <span class="title">AEC CIM Explorer Sample - Quantity takeoff for Doors Sample Workflow</span>
+        <button id="login" style="visibility: hidden;">Login</button>
+    </div>
+    <div id="sidebar">
+        <div>
+            Step 1: List hubs on your account<br />
+            <button type="button" class="btn btn-primary" id="getHubs">List Hubs</button>
+        </div>
+        <hr />
+        <div>
+            Step 2: List project for a hub
+            <div class="mb-3">
+                <input type="text" class="form-control" id="hubId"
+                    placeholder="HubId - e.g. b.768cae14-76b3-4531-9030-25212dab4e48">
+            </div>
+            <button type="button" class="btn btn-primary" id="getProjects">List Projects</button>
+        </div>
+        <hr />
+        <div>
+            Step 3: List all designs in a project
+            <div class="mb-3">
+                <input type="text" class="form-control" id="projectId"
+                    placeholder="ProjectId - e.g. b.f609fbf7-7959-4832-a379-84028c470d0c">
+            </div>
+            <button type="button" class="btn btn-primary" id="getDesigns">List all designs</button>
+        </div>
+        <hr />
+        <div>
+            Step 4: List all doors in a design
+            <div class="mb-3">
+                <input type="text" class="form-control" id="designId"
+                    placeholder="DesignId - e.g. fbb418e4-d663-36fe-bf87-7c555acc4983">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="category" placeholder="Category name - e.g. Doors">
+            </div>
+            <button type="button" class="btn btn-primary" id="getTakeOff">Generate quantity takeoff</button>
+        </div>
+        <hr />
+        &lt;&lt; <a href="/">Back to all samples</a>
+    </div>
+    <div id="preview">
+        <pre><code id="jsonresult"></code></pre>
+    </div>
+    <script src="/graphql.js" type="module"></script>
+    <script src="/main.js" type="module"></script>
+</body>
+
+</html>
