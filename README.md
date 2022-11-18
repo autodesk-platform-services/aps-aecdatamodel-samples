@@ -8,7 +8,7 @@
 
 This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 3 workflows:
 
-- Design Validation
+- [Design Validation](./DesignValidation.md)
 - Quantity takeoff for Doors
 - Window Schedule
 
@@ -18,11 +18,9 @@ This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 3 
 
 ### Prerequisites
 
-- [APS credentials](https://forge.autodesk.com/en/docs/oauth/v2/tutorials/create-app)
-- Provisioned access to [ACC Account](https://forge.autodesk.com/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/)
 - [.NET 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-- (Optional) Terminal (for example, [Windows Command Prompt](https://en.wikipedia.org/wiki/Cmd.exe)
-or [macOS Terminal](https://support.apple.com/guide/terminal/welcome/mac))
+- [APS credentials](https://forge.autodesk.com/en/docs/oauth/v2/tutorials/create-app) (use `http://localhost:8080/api/auth/callback` as callback URL, take note of you Client ID and Client Secret)
+- Provisioned access to [ACC Account](https://forge.autodesk.com/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/) (use Client Id from above)
 
 ### Running locally
 
@@ -38,7 +36,7 @@ Mac OSX/Linux (Terminal)
     export APS_CALLBACK_URL=http://localhost:8080/api/auth/callback
     dotnet run
 
-Windows (use **Node.js command line** from Start menu)
+Windows
 
     dotnet restore
     set APS_CLIENT_ID =<<YOUR CLIENT ID FROM DEVELOPER PORTAL>>
