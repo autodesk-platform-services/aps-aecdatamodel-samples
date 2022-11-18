@@ -6,7 +6,11 @@
 
 ## Description
 
-This sample demonstrates some basic GraphQL queries for AEC CIM. 
+This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 3 workflows:
+
+- Design Validation
+- Quantity takeoff for Doors
+- Window Schedule
 
 ![Sample](./thumbnail.png)
 
@@ -15,28 +19,38 @@ This sample demonstrates some basic GraphQL queries for AEC CIM.
 ### Prerequisites
 
 - [APS credentials](https://forge.autodesk.com/en/docs/oauth/v2/tutorials/create-app)
-- Provisioned access to [BIM 360 Docs](https://forge.autodesk.com/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/)
-or Autodesk Construction Cloud
+- Provisioned access to [ACC Account](https://forge.autodesk.com/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/)
 - [.NET 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-- Terminal (for example, [Windows Command Prompt](https://en.wikipedia.org/wiki/Cmd.exe)
+- (Optional) Terminal (for example, [Windows Command Prompt](https://en.wikipedia.org/wiki/Cmd.exe)
 or [macOS Terminal](https://support.apple.com/guide/terminal/welcome/mac))
 
-### Setup & Run
+### Running locally
 
-- Clone this repository
-- Install dependencies: `dotnet restore`
-- Setup environment variables:
-  - `APS_CLIENT_ID` - your APS application client ID
-  - `APS_CLIENT_SECRET` - your APS application client secret
-  - `APS_CALLBACK_URL` - URL for your users to be redirected to after they successfully log in with their Autodesk account
-    - For local development, the callback URL is `http://localhost:8080/api/auth/callback`
-    - For applications deployed to a custom domain, the callback URL is `http://<your-domain>/api/auth/callback` or `https://<your-domain>/api/auth/callback`
-    - Do not forget to update the callback URL for your application in https://forge.autodesk.com/myapps as well
-- Run the server: `dotnet run`
+Install [.NET 6](https://dotnet.microsoft.com/en-us/download) (or newer)
+
+Clone this project or download it. It's recommended to install GitHub desktop. To clone it via command line, use the following (Terminal on MacOSX/Linux, Git Shell on Windows):
+
+Mac OSX/Linux (Terminal)
+
+    dotnet restore
+    export APS_CLIENT_ID=<<YOUR CLIENT ID FROM DEVELOPER PORTAL>>
+    export APS_CLIENT_SECRET=<<YOUR CLIENT SECRET>>
+    export APS_CALLBACK_URL=http://localhost:8080/api/auth/callback
+    dotnet run
+
+Windows (use **Node.js command line** from Start menu)
+
+    dotnet restore
+    set APS_CLIENT_ID =<<YOUR CLIENT ID FROM DEVELOPER PORTAL>>
+    set APS_CLIENT_SECRET =<<YOUR CLIENT SECRET>>
+    set APS_CALLBACK_URL=http://localhost:8080/api/auth/callback
+    dotnet run
 
 > When using [Visual Studio Code](https://code.visualstudio.com),
 you can specify the env. variables listed above in a _.env_ file in this
 folder, and run & debug the application directly from the editor.
+
+Go to [http://localhost:8080](http://localhost:8080)
 
 ## Troubleshooting
 
