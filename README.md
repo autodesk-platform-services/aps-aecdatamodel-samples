@@ -9,7 +9,7 @@
 This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 3 workflows:
 
 - [Design Validation](./DesignValidation.md)
-- [Quantity takeoff for Doors](./QuantityTakeOff.md)
+- [Quantity takeoff](./QuantityTakeOff.md)
 - [Window Schedule](./Schedule.md)
 
 ![Sample](./thumbnail.png)
