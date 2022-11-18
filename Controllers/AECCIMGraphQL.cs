@@ -1,13 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Net.Http.Headers;
 using GraphQL;
-using Newtonsoft.Json.Linq;
 
 [ApiController]
 [Route("api/graphql")]

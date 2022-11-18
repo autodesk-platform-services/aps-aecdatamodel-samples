@@ -6,7 +6,7 @@ To run the sample, please review [setup](./README.md#SETUP) instructions.
 
 ## Step 1: List all hubs
 
-After login (top-right), click on `List Hubs` and take note of the hubId (`id`).
+After login (top-right), click on `List Hubs` and take note of the hubId (`id`). [See C# code](/Controllers/DesignValidation.cs). 
 
 ![Step 1](./images/hubs.png)
 

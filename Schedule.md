@@ -1,6 +1,6 @@
-## Quantity takeoff for Doors Sample Workflow
+## Window Schedule Sample Workflow
 
-Let's take the sample model and imagine that you would like to build a quantity takeoff for 'Doors'. You will need to get all design entities filtered by classification 'Doors'. 
+A schedule is typically used to identify, in most cases a chart or table providing descriptions of the windows , doors, finishes, lintels, footings, piers, etc. on a construction project. Let's take the same sample model and imagine that you would like to build a window schedule. You will need to retrieve properties like panel glazing, glass, frame material, height, width, etc. of all design entity instances of category windows.
 
 To run the sample, please review [setup](./README.md#SETUP) instructions.
 
