@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 
 public partial class AECCIMGraphQLController : ControllerBase
-{
-    // Refer to AECCIMGraphQL class for other methods
-    
+{   
     [HttpGet("designs/{designId}/takeoff/{category}")]
     public async Task<ActionResult<string>> GetQuantityTakeOff(string designId, string category)
     {

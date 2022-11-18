@@ -4,8 +4,6 @@ using GraphQL;
 
 public partial class AECCIMGraphQLController : ControllerBase
 {
-    // Refer to AECCIMGraphQL class for other methods
-
     [HttpGet("hubs/{hubid}/projects/{projectId}/properties")]
     public async Task<ActionResult<string>> GetProperties(string hubId, string projectId)
     {
@@ -32,5 +30,4 @@ public partial class AECCIMGraphQLController : ControllerBase
 
         return await Query(properties);
     }
-
 }

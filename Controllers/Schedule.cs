@@ -4,8 +4,6 @@ using GraphQL;
 
 public partial class AECCIMGraphQLController : ControllerBase
 {
-    // Refer to AECCIMGraphQL class for other methods
-
     [HttpGet("designs/{designId}/schedule/{category}")]
     public async Task<ActionResult<string>> GetSchedule(string designId, string category)
     {
