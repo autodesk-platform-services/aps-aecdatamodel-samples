@@ -10,7 +10,7 @@ This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 3 
 
 - [Design Validation](./DesignValidation.md)
 - [Quantity takeoff for Doors](./QuantityTakeOff.md)
-- Window Schedule
+- [Window Schedule](./Schedule.md)
 
 ![Sample](./thumbnail.png)
 

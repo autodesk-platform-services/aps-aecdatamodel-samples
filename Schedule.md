@@ -24,16 +24,16 @@ This step uses `hubId` and `projectId`. Take note of the `designId` of the desir
 
 ## Step 4: Generate quantity takeoff
 
-Use the `designId` from step 3. Click on generate quantity takeoff. You may adjust he `Category` field.
+Use the `designId` from step 3. Click on generate schedule. You may adjust he `Category` field.
 
-![Step 3](./images/quantity.png)
+![Step 3](./images/schedule.png)
 
-GraphQL query used:
+Query used:
 
 ```
 {
   designEntities(
-    filter: {designId: "4e5c860f-ff19-3e2d-8375-89f235be54dd", classificationFilter: {category: "Doors"}}
+    filter: {designId: "4e5c860f-ff19-3e2d-8375-89f235be54dd", classificationFilter: {category: "Windows"}}
   ) {
     pagination {
       cursor
@@ -50,12 +50,48 @@ GraphQL query used:
           name
           value
           propertyDefinition {
+            description
+            groupName
+            name
+            readOnly
+            specification
             type
             units
           }
+        }
+      }
+      referencedBy {
+        results {
+          id
+          classification {
+            category
+          }
+          properties {
+            results {
+              displayValue
+              name
+              value
+              propertyDefinition {
+                description
+                groupName
+                name
+                readOnly
+                specification
+                type
+                units
+              }
+            }
+          }
+        }
+      }
+      references {
+        results {
+          id
+          name
         }
       }
     }
   }
 }
 ```
+
