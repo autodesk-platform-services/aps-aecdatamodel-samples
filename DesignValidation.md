@@ -1,6 +1,6 @@
 # AEC CIM Samples in .NET
 
-Review [readme](./README.md) for setup instructions.
+Review [readme](./README.md#SETUP) for setup instructions.
 
 ## Design Validation Sample Workflow
 
