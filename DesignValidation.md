@@ -18,7 +18,7 @@ Use the `HubId` from step 1 to list all projects and take note of the projectId 
 
 ## Step 3: List all properties
 
-This step uses `hubId` and `projectId`. Click on List all properties. [See C# code](/Controllers/DesignVaidation.cs). 
+This step uses `hubId` and `projectId`. Click on List all properties. [See C# code](/Controllers/DesignValidation.cs). 
 
 ![Step 3](./images/allproperties.png)
 

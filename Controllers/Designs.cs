@@ -1,8 +1,5 @@
 using System.Threading.Tasks;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using GraphQL;
 
 public partial class AECCIMGraphQLController : ControllerBase
