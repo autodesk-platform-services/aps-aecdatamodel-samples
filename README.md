@@ -18,7 +18,7 @@ This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 3 
 
 ### Prerequisites
 
-- [.NET 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) (current LTS)
 - [APS credentials](https://forge.autodesk.com/en/docs/oauth/v2/tutorials/create-app) (use `http://localhost:8080/api/auth/callback` as callback URL, take note of you Client ID and Client Secret)
 - Provisioned access to [ACC Account](https://forge.autodesk.com/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/) (use Client Id from above)
 
@@ -56,7 +56,9 @@ Go to [http://localhost:8080](http://localhost:8080)
 
 ## Troubleshooting
 
-Please contact us via https://forge.autodesk.com/en/support/get-help.
+General [APS Support form](https://forge.autodesk.com/en/support/get-help).
+
+- [Install .NET on macOS](https://learn.microsoft.com/en-us/dotnet/core/install/macos)
 
 ## License
 
