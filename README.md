@@ -28,6 +28,10 @@ Install [.NET 6](https://dotnet.microsoft.com/en-us/download) (or newer)
 
 Clone this project or download it. It's recommended to install GitHub desktop. To clone it via command line, use the following (Terminal on MacOSX/Linux, Git Shell on Windows):
 
+	git clone https://github.com/autodesk-platform-services/aps-aecim-samples.git
+	
+Specify the following environment variables:
+
 Mac OSX/Linux (Terminal)
 
     dotnet restore
