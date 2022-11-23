@@ -34,6 +34,7 @@ public partial class AECCIMGraphQLController : ControllerBase
         client.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + tokens.InternalToken);
         var response = await client.SendQueryAsync<object>(query);
 
+        if (response.Data == null) return BadRequest(response.Errors[0].Message);
         return Ok(response.Data.ToString());
     }
 }

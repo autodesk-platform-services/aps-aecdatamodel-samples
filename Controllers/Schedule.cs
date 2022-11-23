@@ -10,36 +10,14 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-                {
-                designEntities(
-                    filter: {designId: ""$designId"", classificationFilter: {category: ""$category""}}
-                ) {
-                    pagination {
-                        cursor
-                        limit
-                    }
-                    results {
-                        id
-                        classification {
-                            category
-                    }
-                    properties {
-                        results {
-                            displayValue
-                            name
-                            value
-                            propertyDefinition {
-                                description
-                                groupName
-                                name
-                                readOnly
-                                specification
-                                type
-                                units
-                            }
+                query GetDesignEntitiesByCategory ($designId: ID) { 
+                    designEntities(
+                    filter: {designId: $designId, classificationFilter: {category: ""$category""}}
+                    ) {
+                        pagination {
+                            cursor
+                            limit
                         }
-                    }
-                    referencedBy {
                         results {
                             id
                             classification {
@@ -61,17 +39,43 @@ public partial class AECCIMGraphQLController : ControllerBase
                                 }
                             }
                         }
+                        referencedBy {
+                            results {
+                            id
+                            classification {
+                                category
+                            }
+                            properties {
+                                results {
+                                displayValue
+                                name
+                                value
+                                propertyDefinition {
+                                    description
+                                    groupName
+                                    name
+                                    readOnly
+                                    specification
+                                    type
+                                    units
+                                }
+                                }
+                            }
+                            }
+                        }
+                        references {
+                            results {
+                            id
+                            name
+                            }
+                        }
                         }
                     }
-                    references {
-                        results {
-                        id
-                        name
-                        }
-                    }
-                    }
-                }
-                }".Replace("$designId", designId).Replace("$category", category),
+                    }".Replace("$category", category),
+            Variables = new
+            {
+                designId = designId
+            }
         };
 
         return await Query(properties);

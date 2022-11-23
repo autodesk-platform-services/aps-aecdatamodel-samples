@@ -29,14 +29,17 @@ public partial class AECCIMGraphQLController : ControllerBase
         var hubs = new GraphQLRequest
         {
             Query = @"
-			    query {
-			        projects (hubId: ""$hubId"") {
+			    query GetProjects ($hubId: String!) {
+			        projects (hubId: $hubId) {
                         results {
                             id
                             name
                         }
 			        }
-			    }".Replace("$hubId", hubId),
+			    }", 
+                Variables = new {
+                    hubId = hubId
+                }
         };
 
         return await Query(hubs);

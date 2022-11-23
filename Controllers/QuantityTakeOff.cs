@@ -3,40 +3,44 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 
 public partial class AECCIMGraphQLController : ControllerBase
-{   
+{
     [HttpGet("designs/{designId}/takeoff/{category}")]
     public async Task<ActionResult<string>> GetQuantityTakeOff(string designId, string category)
     {
         var properties = new GraphQLRequest
         {
             Query = @"
-                {
-                designEntities(
-                    filter: {designId: ""$designId"", classificationFilter: {category: ""$category""}}
-                ) {
-                    pagination {
-                        cursor
-                        limit
-                    }
-                    results {
-                        id
-                        classification {
-                            category
-                        }
-                        properties {
+                query GetDesignEntitiesByCategory ($designId: ID) { 
+                    designEntities(
+                    filter: {designId: $designId, classificationFilter: {category: ""$category""}}
+                    ) {
+                        pagination {
+                                cursor
+                                limit
+                            }
                             results {
-                                displayValue
-                                name
-                                value
-                                propertyDefinition {
-                                    type
-                                    units
+                                id
+                                classification {
+                                category
+                            }
+                            properties {
+                                results {
+                                    displayValue
+                                    name
+                                    value
+                                    propertyDefinition {
+                                        type
+                                        units
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                }".Replace("$designId", designId).Replace("$category", category),
+                }".Replace("$category", category),
+            Variables = new
+            {
+                designId = designId
+            }
         };
 
         return await Query(properties);

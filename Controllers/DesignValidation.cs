@@ -10,8 +10,8 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-			    query {
-                    designs(filter: { hubId: ""$hubId"", projectId: ""$projectId""}) {
+			    query GetProperties ($projectId: ID!, $hubId: ID!) {
+                    designs(filter: {projectId: $projectId, hubId: $hubId }) {
                         results {
                             id
                             propertyDefinitions {
@@ -25,7 +25,12 @@ public partial class AECCIMGraphQLController : ControllerBase
                             }
                         }
                     }
-                }".Replace("$hubId", hubId).Replace("$projectId", projectId),
+                }",
+            Variables = new
+            {
+                hubId = hubId,
+                projectId = projectId
+            }
         };
 
         return await Query(properties);

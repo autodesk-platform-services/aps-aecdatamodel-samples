@@ -62,6 +62,8 @@ async function query(url) {
     else if (resp.status == 401) {
         return resp.statusText + ' - Please login first';
     }
+    else if (resp.status == 400)
+        return resp.text();
     else
         return resp.statusText;
 }

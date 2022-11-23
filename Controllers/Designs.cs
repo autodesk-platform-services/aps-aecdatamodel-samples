@@ -10,42 +10,37 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-                query GetDesigns {
-                project(
-                    hubId: ""$hubId""
-                    projectId: ""$projectId""
+                query GetDesigns ($hubId: String!, $projectId: String!) {
+                    project(
+                        hubId: $hubId
+                        projectId: $projectId
                 ) {
                     id
                     name
                     folders {
-                    results {
-                        id
-                        name
-                        items {
                         results {
                             id
                             name
-                            __typename
-                            ... on Folder {
                             items {
                                 results {
-                                name
-                                id
-                                __typename
-                                extensionType
-                                ... on BasicFile {
-                                    designId
+                                    id
                                     name
-                                }
+                                    __typename
+                                    ... on BasicFile {
+                                            designId
+                                            name
+                                        }
+                                    }
                                 }
                             }
-                            }
-                        }
                         }
                     }
-                    }
-                }
-                }".Replace("$hubId", hubId).Replace("$projectId", projectId),
+                }",
+            Variables = new
+            {
+                hubId = hubId,
+                projectId = projectId
+            }
         };
 
         return await Query(properties);
