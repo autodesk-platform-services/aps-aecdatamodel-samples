@@ -10,7 +10,7 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-                query GetDesigns ($projectId: String!) {
+                query GetDesigns ($projectId: ID!) {
                     aecDesignsByProject(
                         projectId: $projectId
                 ) {

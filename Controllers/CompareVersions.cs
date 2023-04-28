@@ -10,7 +10,7 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-            query getVersionProperties($designId: String!, $versionNumber: String!){
+            query getVersionProperties($designId: ID!, $versionNumber: String!){
               aecDesignByVersionNumber(designId:$designId , versionNumber:$versionNumber ){
               name
               elements {

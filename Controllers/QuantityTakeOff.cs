@@ -10,7 +10,7 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-                query getQuantityTakeoff ($designId: String!, $elementsfilter: String!){
+                query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
                     elements (designId: $designId, filter: { query: $elementsfilter}) {
                       results{
                         id

@@ -10,7 +10,7 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-                query GetSchedule($designId: String!, $elementsfilter: String!){
+                query GetSchedule($designId: ID!, $elementsfilter: String!){
                   elements (designId: ,
                                    filter: { query: $elementsfilter}
                     ) {

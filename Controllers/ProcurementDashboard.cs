@@ -10,7 +10,7 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-                query GetDesigns ($designId: String!, $filterQuery: String!, $name: String!, $query: String!, $includeReferencesProperties: String!){
+                query GetDesigns ($designId: ID!, $filterQuery: String!, $name: String!, $query: String!, $includeReferencesProperties: String!){
                   elements (designId: $designId,
                     filter: { query: $elementsfilter }
                 ) {
