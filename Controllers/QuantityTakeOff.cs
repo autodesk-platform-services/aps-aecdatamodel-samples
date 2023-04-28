@@ -4,42 +4,24 @@ using GraphQL;
 
 public partial class AECCIMGraphQLController : ControllerBase
 {
-    [HttpGet("designs/{designId}/takeoff/{category}")]
-    public async Task<ActionResult<string>> GetQuantityTakeOff(string designId, string category)
+    [HttpGet("designs/{designId}/takeoff/{elementsfilter}")]
+    public async Task<ActionResult<string>> GetQuantityTakeOff(string designId, string elementsfilter)
     {
         var properties = new GraphQLRequest
         {
             Query = @"
-                query GetDesignEntitiesByCategory ($designId: ID) { 
-                    designEntities(
-                    filter: {designId: $designId, classificationFilter: {category: ""$category""}}
-                    ) {
-                        pagination {
-                                cursor
-                                limit
-                            }
-                            results {
-                                id
-                                classification {
-                                category
-                            }
-                            properties {
-                                results {
-                                    displayValue
-                                    name
-                                    value
-                                    propertyDefinition {
-                                        type
-                                        units
-                                    }
-                                }
-                            }
-                        }
+                query getQuantityTakeoff ($designId: String!, $elementsfilter: String!){
+                    elements (designId: $designId, filter: { query: $elementsfilter}) {
+                      results{
+                        id
+                        name
+                       }
                     }
-                }".Replace("$category", category),
+                }",
             Variables = new
             {
-                designId = designId
+                designId = designId,
+                elementsfilter = elementsfilter
             }
         };
 

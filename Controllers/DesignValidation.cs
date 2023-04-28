@@ -5,30 +5,31 @@ using GraphQL;
 public partial class AECCIMGraphQLController : ControllerBase
 {
     [HttpGet("hubs/{hubid}/projects/{projectId}/properties")]
-    public async Task<ActionResult<string>> GetProperties(string hubId, string projectId)
+    public async Task<ActionResult<string>> GetProperties(string projectId)
     {
         var properties = new GraphQLRequest
         {
             Query = @"
-			    query GetProperties ($projectId: ID!, $hubId: ID!) {
-                    designs(filter: {projectId: $projectId, hubId: $hubId }) {
-                        results {
-                            id
-                            propertyDefinitions {
-                                results {
-                                    type
-                                    name
-                                    description
-                                    specification
-                                    units
-                                }
-                            }
-                        }
-                    }
+			    query aecdesigns ($projectId: String!) {
+                  aecDesignsByProject(
+                      projectId: $projectId}
+                  ) {
+                    results {
+                      id
+                      propertyDefinitions {
+                        results {
+                          type
+                          name
+                          description
+                          specification
+                          units
+                        }
+                      }
+                    }
+                  }
                 }",
             Variables = new
             {
-                hubId = hubId,
                 projectId = projectId
             }
         };
