@@ -29,7 +29,7 @@ public partial class AECCIMGraphQLController : ControllerBase
         var hubs = new GraphQLRequest
         {
             Query = @"
-			    query GetProjects ($hubId: String!) {
+			    query GetProjects ($hubId: ID!) {
 			        projects (hubId: $hubId) {
                         results {
                             id

@@ -5,76 +5,50 @@ using GraphQL;
 public partial class AECCIMGraphQLController : ControllerBase
 {
     [HttpGet("designs/{designId}/schedule/{category}")]
-    public async Task<ActionResult<string>> GetSchedule(string designId, string category)
+    public async Task<ActionResult<string>> GetSchedule(string designId, string elementsfilter)
     {
         var properties = new GraphQLRequest
         {
             Query = @"
-                query GetDesignEntitiesByCategory ($designId: ID) { 
-                    designEntities(
-                    filter: {designId: $designId, classificationFilter: {category: ""$category""}}
-                    ) {
-                        pagination {
-                            cursor
-                            limit
-                        }
-                        results {
-                            id
-                            classification {
-                                category
-                        }
-                        properties {
-                            results {
-                                displayValue
-                                name
-                                value
-                                propertyDefinition {
-                                    description
-                                    groupName
-                                    name
-                                    readOnly
-                                    specification
-                                    type
-                                    units
-                                }
-                            }
-                        }
-                        referencedBy {
-                            results {
-                            id
-                            classification {
-                                category
-                            }
-                            properties {
-                                results {
-                                displayValue
-                                name
-                                value
-                                propertyDefinition {
-                                    description
-                                    groupName
-                                    name
-                                    readOnly
-                                    specification
-                                    type
-                                    units
-                                }
-                                }
-                            }
-                            }
-                        }
-                        references {
-                            results {
-                            id
-                            name
-                            }
-                        }
-                        }
-                    }
-                    }".Replace("$category", category),
+                query GetSchedule($designId: ID!, $elementsfilter: String!){
+	elements (designId: $designId,filter: { query: $elementsfilter}){
+		results{
+			id
+			name
+			properties{
+				results{
+					name
+					value
+					displayValue
+					propertyDefinition{
+						units
+					}
+				}
+			}
+			references{
+				results{
+					name
+					value{
+						properties{
+							results{
+								name
+								value
+								displayValue
+								propertyDefinition{
+									units
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}",
             Variables = new
             {
-                designId = designId
+                designId = designId,
+                elementsfilter = elementsfilter
             }
         };
 
