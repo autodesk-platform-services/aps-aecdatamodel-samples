@@ -11,13 +11,13 @@ public partial class AECCIMGraphQLController : ControllerBase
         {
             Query = @"
                 query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
-                    elements (designId: $designId, filter: { query: $elementsfilter}) {
-                      results{
-                        id
-                        name
-                       }
-                    }
-                }",
+	elements (designId: $designId, filter: { query: $elementsfilter}) {
+			results{
+				id
+				name
+			 }
+		}
+}",
             Variables = new
             {
                 designId = designId,

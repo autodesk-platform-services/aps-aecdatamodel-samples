@@ -11,42 +11,40 @@ public partial class AECCIMGraphQLController : ControllerBase
         {
             Query = @"
                 query GetSchedule($designId: ID!, $elementsfilter: String!){
-                  elements (designId: ,
-                                   filter: { query: $elementsfilter}
-                    ) {
-                      results{
-                        id
-                        name
-                        properties {
-                           results{
-                              name
-                              value
-                              display value
-                               propertyDefinition{
-                                units
-                            }
-                          }
-                        }
-                references{
-                    results {
-                        name
-                        value {
-                           properties{
-                               results{
-                                 name
-                                 value
-                                display value
-                                propertyDefinition{
-                                 units
-                                }
-                             }
-                           }
-                        }.  
-                      }
-                     }
-                    }
-                  }
-                }",
+	elements (designId: $designId,filter: { query: $elementsfilter}){
+		results{
+			id
+			name
+			properties{
+				results{
+					name
+					value
+					displayValue
+					propertyDefinition{
+						units
+					}
+				}
+			}
+			references{
+				results{
+					name
+					value{
+						properties{
+							results{
+								name
+								value
+								displayValue
+								propertyDefinition{
+									units
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}",
             Variables = new
             {
                 designId = designId,
