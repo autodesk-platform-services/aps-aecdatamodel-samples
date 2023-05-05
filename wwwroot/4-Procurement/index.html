@@ -49,12 +49,18 @@
       </div>
       <div class="mb-3">
         <input type="text" class="form-control" id="elementsfilter"
-          placeholder="Elements filter - e.g. metadata.name=='Level 10'">
+          placeholder="Elements filter - e.g. metadata.name=='Level 10'" list="elementsFilter">
+        <datalist id="elementsFilter">
+          <option value="metadata.name=='Level 10'">metadata.name=='Level 10'</option>
+        </datalist>
       </div>
       <div class="mb-3">
         <input type="text" class="form-control" id="referencefilter"
-          placeholder="Category filter name - e.g. property.name.category=='furniture'">
+          placeholder="Category filter name - e.g. property.name.category=='furniture'" list="referenceFilter">
       </div>
+      <datalist id="referenceFilter">
+        <option value="property.name.category=='furniture'">property.name.category=='furniture'</option>
+      </datalist>
       <button type="button" class="btn btn-primary" id="getProcurement">Generate Procurement</button>
     </div>
     <hr />
