@@ -6,17 +6,15 @@ public partial class APS
 {
     public string GetAuthorizationURL()
     {
-        string authorizationurl = new ThreeLeggedApi().Authorize(_clientId, "code", _callbackUri, InternalTokenScopes);
-		return authorizationurl.Replace("developer.api", "developer-stg.api");
+			return new ThreeLeggedApi().Authorize(_clientId, "code", _callbackUri, InternalTokenScopes);
     }
 
     public async Task<Tokens> GenerateTokens(string code)
     {
-        var threeleggedapi = new ThreeLeggedApi();
-		threeleggedapi.Configuration.ApiClient = new Autodesk.Forge.Client.ApiClient("https://developer-stg.api.autodesk.com");
-		dynamic internalAuth = await threeleggedapi.GettokenAsync(_clientId, _clientSecret, "authorization_code", code, _callbackUri);
-		dynamic publicAuth = await threeleggedapi.RefreshtokenAsync(_clientId, _clientSecret, "refresh_token", internalAuth.refresh_token, PublicTokenScopes);
-		return new Tokens
+			var threeleggedapi = new ThreeLeggedApi();
+			dynamic internalAuth = await threeleggedapi.GettokenAsync(_clientId, _clientSecret, "authorization_code", code, _callbackUri);
+			dynamic publicAuth = await threeleggedapi.RefreshtokenAsync(_clientId, _clientSecret, "refresh_token", internalAuth.refresh_token, PublicTokenScopes);
+			return new Tokens
 		{
 			PublicToken = publicAuth.access_token,
 			InternalToken = internalAuth.access_token,
@@ -27,11 +25,10 @@ public partial class APS
 
     public async Task<Tokens> RefreshTokens(Tokens tokens)
     {
-        var threeleggedapi = new ThreeLeggedApi();
-		threeleggedapi.Configuration.ApiClient = new Autodesk.Forge.Client.ApiClient("https://developer-stg.api.autodesk.com");
-		dynamic internalAuth = await threeleggedapi.RefreshtokenAsync(_clientId, _clientSecret, "refresh_token", tokens.RefreshToken, InternalTokenScopes);
-		dynamic publicAuth = await threeleggedapi.RefreshtokenAsync(_clientId, _clientSecret, "refresh_token", internalAuth.refresh_token, PublicTokenScopes);
-		return new Tokens
+			var threeleggedapi = new ThreeLeggedApi();
+			dynamic internalAuth = await threeleggedapi.RefreshtokenAsync(_clientId, _clientSecret, "refresh_token", tokens.RefreshToken, InternalTokenScopes);
+			dynamic publicAuth = await threeleggedapi.RefreshtokenAsync(_clientId, _clientSecret, "refresh_token", internalAuth.refresh_token, PublicTokenScopes);
+			return new Tokens
 		{
 			PublicToken = publicAuth.access_token,
 			InternalToken = internalAuth.access_token,

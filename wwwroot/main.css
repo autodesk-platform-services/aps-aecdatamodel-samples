@@ -67,3 +67,8 @@ body, html {
         bottom: 0;
     }
 }
+
+.compareversions{
+    display: inline-block;
+    margin-left: 5%;
+}

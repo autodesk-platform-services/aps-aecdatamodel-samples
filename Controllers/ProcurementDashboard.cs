@@ -5,17 +5,17 @@ using GraphQL;
 public partial class AECCIMGraphQLController : ControllerBase
 {
     [HttpGet("designs/{designId}/procurement")]
-    public async Task<ActionResult<string>> GetFurnitureProcurement(string designId, string elementsfilter, string name, string referencefilter)
+    public async Task<ActionResult<string>> GetFurnitureProcurement(string designId, string elementsfilter, string referencefilter)
     {
         var properties = new GraphQLRequest
         {
             Query = @"
-              query GetProcurement ($designId: ID!, $elementsfilter: String!, $name: String!, $referencefilter: String!){
+              query GetProcurement ($designId: ID!, $elementsfilter: String!, $referencefilter: String!){
                   elements (designId: $designId,filter: { query: $elementsfilter }){
 		results{
 			id
 			name
-			referencedBy(name: $name, filter:{query:$referencefilter}){
+			referencedBy(name: ""hosted"", filter:{query:$referencefilter}){
 				results{
 					id
 					name
@@ -32,10 +32,9 @@ public partial class AECCIMGraphQLController : ControllerBase
 }",
             Variables = new
             {
-                designId = designId,
-                elementsfilter = elementsfilter,
-								name = name,
-                referencefilter = referencefilter
+							designId = designId,
+							elementsfilter = elementsfilter,
+							referencefilter = referencefilter
             }
         };
 
