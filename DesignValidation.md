@@ -25,17 +25,20 @@ This step uses `projectId`. Click on List all properties. [See C# code](/Control
 Query used:
 
 ```
-elementsByProject(projectId: "your project id") {
+aecDesignsByProject(projectId: $projectId) {
   pagination{
     pageSize
     cursor
   }
   results{
     name
-    properties{
+    id
+    propertyDefinitions{
       results{
-        value
+        id
         name
+        description
+        specification
       }
     }
   }

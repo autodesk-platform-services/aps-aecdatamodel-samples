@@ -11,20 +11,23 @@ public partial class AECCIMGraphQLController : ControllerBase
         {
             Query = @"
 			    query getDesignValidation($projectId: ID!) {
-  elementsByProject(projectId: $projectId) {
-    pagination{
-      pageSize
-      cursor
-    }
+            aecDesignsByProject(projectId: $projectId) {
+              pagination{
+                pageSize
+                cursor
+              }
     results{
-			name
-			properties{
+      name
+      id
+			propertyDefinitions{
 				results{
-					value
+					id
 					name
+					description
+					specification
 				}
 			}
-		}
+    }
   }
 }",
             Variables = new
