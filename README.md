@@ -6,11 +6,13 @@
 
 ## Description
 
-This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 3 workflows:
+This sample demonstrates some basic GraphQL queries for AEC CIM, implementing 5 workflows:
 
 - [Design Validation](./DesignValidation.md)
 - [Quantity takeoff](./QuantityTakeOff.md)
 - [Schedule](./Schedule.md)
+- [Procurement](./ProcurementDashboard.md)
+- [Compare](./CompareVersions.md)
 
 ![Sample](./thumbnail.png)
 
@@ -28,7 +30,7 @@ Install [.NET 6](https://dotnet.microsoft.com/en-us/download) (or newer)
 
 Clone this project or download it. It's recommended to install GitHub desktop. To clone it via command line, use the following (Terminal on MacOSX/Linux, Git Shell on Windows):
 
-	git clone https://github.com/autodesk-platform-services/aps-aecim-samples.git
+	git clone https://github.com/autodesk-platform-services/aps-aecdatamodel-samples.git
 	
 Specify the following environment variables:
 
@@ -56,7 +58,7 @@ Go to [http://localhost:8080](http://localhost:8080)
 
 ## Troubleshooting
 
-General [APS Support form](https://forge.autodesk.com/en/support/get-help).
+General [APS Support form](https://aps.autodesk.com/en/support/get-help).
 
 - [Install .NET on macOS](https://learn.microsoft.com/en-us/dotnet/core/install/macos)
 
