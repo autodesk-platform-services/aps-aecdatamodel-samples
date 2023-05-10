@@ -4,7 +4,7 @@ using GraphQL;
 
 public partial class AECCIMGraphQLController : ControllerBase
 {
-    [HttpGet("designs/{designId}/schedule/{category}")]
+    [HttpGet("designs/{designId}/schedule/{elementsfilter}")]
     public async Task<ActionResult<string>> GetSchedule(string designId, string elementsfilter)
     {
         var properties = new GraphQLRequest
@@ -12,6 +12,10 @@ public partial class AECCIMGraphQLController : ControllerBase
             Query = @"
                 query GetSchedule($designId: ID!, $elementsfilter: String!){
 	elements (designId: $designId,filter: { query: $elementsfilter}){
+		pagination{
+			pageSize
+			cursor
+		}
 		results{
 			id
 			name

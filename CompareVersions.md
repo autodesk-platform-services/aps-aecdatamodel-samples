@@ -18,7 +18,7 @@ Use the `HubId` from step 1 to list all projects and take note of the projectId 
 
 ## Step 3: List all designs in a project
 
-This step uses `hubId` and `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
+This step uses `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
 
 ![Step 3](./images/designs.png)
 
@@ -32,7 +32,7 @@ Query used:
 
 ```
 {
-  aecDesignByVersionNumber(designId: "fbb418e4-d663-36fe-bf87-7c555acc4983" , versionNumber: 4 ){
+  aecDesignByVersionNumber(designId:"your design id" , versionNumber:versionNumber ){
 		name
 		elements{
 			results{
@@ -52,6 +52,5 @@ Query used:
 			}
 		}
 	}
-}
 ```
 

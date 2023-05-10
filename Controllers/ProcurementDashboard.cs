@@ -10,17 +10,26 @@ public partial class AECCIMGraphQLController : ControllerBase
         var properties = new GraphQLRequest
         {
             Query = @"
-              query GetProcurement ($designId: ID!, $elementsfilter: String!, $referencefilter: String!){
-                  elements (designId: $designId,filter: { query: $elementsfilter }){
-		results{
+						query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {
+	elements(designId: $designId, filter: { query: $elementsfilter}) {
+		pagination {
+			pageSize
+			cursor
+		}
+		results {
 			id
 			name
-			referencedBy(name: ""hosted"", filter:{query:$referencefilter}){
-				results{
-					id
+			properties {
+				results {
 					name
-					properties(includeReferencesProperties: ""Type""){
-						results{
+					value
+				}
+			}
+			referencedBy (name: ""Level"", filter: { query: $referencefilter}) {
+				results {
+					name
+					properties {
+						results {
 							name
 							value
 						}

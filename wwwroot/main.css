@@ -71,4 +71,6 @@ body, html {
 .compareversions{
     display: inline-block;
     margin-left: 5%;
+    width: 40%;
+    overflow: auto;
 }

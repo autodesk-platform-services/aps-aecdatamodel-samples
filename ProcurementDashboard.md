@@ -18,7 +18,7 @@ Use the `HubId` from step 1 to list all projects and take note of the projectId 
 
 ## Step 3: List all designs in a project
 
-This step uses `hubId` and `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
+This step uses `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
 
 ![Step 3](./images/designs.png)
 
@@ -31,17 +31,25 @@ Use the `designId` from step 3. Click on generate schedule. You may adjust he `f
 Query used:
 
 ```
-{
-	elements (designId: "fbb418e4-d663-36fe-bf87-7c555acc4983",filter:{ query: "metadata.name=='Level 10'"}){
-		results{
+elements(designId: "your design id", filter: { query: "property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'"}) {
+	pagination {
+		pageSize
+		cursor
+	}
+	results {
 		id
 		name
-		referencedBy(name: "hosted", filter:{query:"property.name.category=='furniture'"}){
-			results{
-				id
+		properties {
+			results {
 				name
-				properties(includeReferencesProperties: ""Type""){
-					results{
+				value
+			}
+		}
+		referencedBy (name: ""Level"", filter: { query: "property.name.category==Furniture"}) {
+			results {
+				name
+				properties {
+					results {
 						name
 						value
 					}

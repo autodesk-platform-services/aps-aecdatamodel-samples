@@ -18,27 +18,24 @@ Use the `HubId` from step 1 to list all projects and take note of the projectId 
 
 ## Step 3: List all properties
 
-This step uses `hubId` and `projectId`. Click on List all properties. [See C# code](/Controllers/DesignValidation.cs). 
+This step uses `projectId`. Click on List all properties. [See C# code](/Controllers/DesignValidation.cs). 
 
 ![Step 3](./images/allproperties.png)
 
 Query used:
 
 ```
-{
-  designs(
-    filter: {hubId: "b.768cae14-76b3-4531-9030-25212dab4e48", projectId: "b.f609fbf7-7959-4832-a379-84028c470d0c"}
-  ) {
-    results {
-      id
-      propertyDefinitions {
-        results {
-          type
-          name
-          description
-          specification
-          units
-        }
+elementsByProject(projectId: "your project id") {
+  pagination{
+    pageSize
+    cursor
+  }
+  results{
+    name
+    properties{
+      results{
+        value
+        name
       }
     }
   }

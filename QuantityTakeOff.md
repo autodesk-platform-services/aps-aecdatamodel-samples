@@ -18,7 +18,7 @@ Use the `HubId` from step 1 to list all projects and take note of the projectId 
 
 ## Step 3: List all designs in a project
 
-This step uses `hubId` and `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
+This step uses `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
 
 ![Step 3](./images/designs.png)
 
@@ -31,31 +31,14 @@ Use the `designId` from step 3. Click on generate quantity takeoff. You may adju
 GraphQL query used:
 
 ```
-{
-  designEntities(
-    filter: {designId: "4e5c860f-ff19-3e2d-8375-89f235be54dd", classificationFilter: {category: "Doors"}}
-  ) {
-    pagination {
+elements (designId: "your design id", filter: { query: "property.name.category==Doors and 'property.name.Element Context'==Instance"}) {
+  pagination{
+      pageSize
       cursor
-      limit
-    }
-    results {
-      id
-      classification {
-        category
-      }
-      properties {
-        results {
-          displayValue
-          name
-          value
-          propertyDefinition {
-            type
-            units
-          }
-        }
-      }
-    }
+  }
+  results{
+    id
+    name
   }
 }
 ```

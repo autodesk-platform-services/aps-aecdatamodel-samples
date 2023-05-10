@@ -44,10 +44,10 @@ registerOnClick('getTakeOff', async () => {
 // Sample 3 Schedule
 registerOnClick('getSchedule', async () => {
     let designId = document.getElementById('designId').value;
-    let category = document.getElementById('category').value;
+    let elementsfilter = document.getElementById('elementsFilter').value;
     if (designId === '') { writeResponse('Please provide the HubId'); return; }
-    if (category === '') { writeResponse('Please provide the category'); return; }
-    let elements = await query('/api/graphql/designs/' + designId + '/schedule/' + category);
+    if (elementsfilter === '') { writeResponse('Please provide the elements filter'); return; }
+    let elements = await query('/api/graphql/designs/' + designId + '/schedule/' + elementsfilter);
     writeResponse(elements);
 });
 

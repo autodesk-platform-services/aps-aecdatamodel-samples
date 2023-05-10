@@ -35,8 +35,7 @@
     <div>
       Step 3: List all designs in a project
       <div class="mb-3">
-        <input type="text" class="form-control" id="projectId"
-          placeholder="ProjectId - e.g. b.f609fbf7-7959-4832-a379-84028c470d0c">
+        <input type="text" class="form-control" id="projectId" placeholder="ProjectId - e.g. YWlt...5Zg">
       </div>
       <button type="button" class="btn btn-primary" id="getDesigns">List all designs</button>
     </div>
@@ -45,22 +44,24 @@
       Step 4: List furniture at level
       <div class="mb-3">
         <input type="text" class="form-control" id="designId"
-          placeholder="DesignId - e.g. fbb418e4-d663-36fe-bf87-7c555acc4983">
+          placeholder="DesignId - e.g. YWVjZH5xc...IxbW5LVTVVVTRjTkV3">
       </div>
       <div class="mb-3">
         <input type="text" class="form-control" id="elementsfilter"
-          placeholder="Elements filter - e.g. metadata.name=='Level 10'" list="elementsFilter">
-        <datalist id="elementsFilter">
-          <option value="metadata.name=='Level 10'">metadata.name=='Level 10'</option>
+          placeholder="property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'"
+          list="elementsFilterList">
+        <datalist id="elementsFilterList">
+          <option value="property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'">
+            property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'</option>
         </datalist>
       </div>
       <div class="mb-3">
         <input type="text" class="form-control" id="referencefilter"
-          placeholder="Category filter name - e.g. property.name.category=='furniture'" list="referenceFilter">
+          placeholder="Category filter name - e.g. property.name.category==Furniture" list="referenceFilterList">
+        <datalist id="referenceFilterList">
+          <option value="property.name.category==Furniture">property.name.category==Furniture</option>
+        </datalist>
       </div>
-      <datalist id="referenceFilter">
-        <option value="property.name.category=='furniture'">property.name.category=='furniture'</option>
-      </datalist>
       <button type="button" class="btn btn-primary" id="getProcurement">Generate Procurement</button>
     </div>
     <hr />

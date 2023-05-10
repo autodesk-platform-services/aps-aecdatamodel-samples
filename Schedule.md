@@ -18,76 +18,51 @@ Use the `HubId` from step 1 to list all projects and take note of the projectId 
 
 ## Step 3: List all designs in a project
 
-This step uses `hubId` and `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
+This step uses `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs). 
 
 ![Step 3](./images/designs.png)
 
-## Step 4: Generate quantity takeoff
+## Step 4: Generate Schedule
 
-Use the `designId` from step 3. Click on generate schedule. You may adjust he `Category` field. [See C# code](/Controllers/Schedule.cs). 
+Use the `designId` from step 3. Click on generate schedule. You may adjust he `filter` field. [See C# code](/Controllers/Schedule.cs). 
 
 ![Step 3](./images/schedule.png)
 
 Query used:
 
 ```
-{
-  designEntities(
-    filter: {designId: "4e5c860f-ff19-3e2d-8375-89f235be54dd", classificationFilter: {category: "Windows"}}
-  ) {
-    pagination {
-      cursor
-      limit
-    }
-    results {
-      id
-      classification {
-        category
-      }
-      properties {
-        results {
-          displayValue
-          name
-          value
-          propertyDefinition {
-            description
-            groupName
-            name
-            readOnly
-            specification
-            type
-            units
-          }
+elements (designId: "your design id",filter: { query: "property.name.category==Windows and 'property.name.Element Context'==Instance"}){
+  pagination{
+    pageSize
+    cursor
+  }
+  results{
+    id
+    name
+    properties{
+      results{
+        name
+        value
+        displayValue
+        propertyDefinition{
+          units
         }
       }
-      referencedBy {
-        results {
-          id
-          classification {
-            category
-          }
-          properties {
-            results {
-              displayValue
+    }
+    references{
+      results{
+        name
+        value{
+          properties{
+            results{
               name
               value
-              propertyDefinition {
-                description
-                groupName
-                name
-                readOnly
-                specification
-                type
+              displayValue
+              propertyDefinition{
                 units
               }
             }
           }
-        }
-      }
-      references {
-        results {
-          id
-          name
         }
       }
     }

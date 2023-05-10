@@ -12,6 +12,10 @@ public partial class AECCIMGraphQLController : ControllerBase
             Query = @"
                 query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
 	elements (designId: $designId, filter: { query: $elementsfilter}) {
+            pagination{
+                pageSize
+                cursor
+            }
 			results{
 				id
 				name
