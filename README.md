@@ -69,4 +69,5 @@ Please see the [LICENSE](LICENSE) file for more details.
 
 ## Written by
 
+Augusto Goncalves [@augustomaia](https://twitter.com/augustomaia), Developer Advocate
 João Martins, Developer Advocate
