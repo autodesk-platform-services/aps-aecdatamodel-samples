@@ -20,6 +20,10 @@
     <div id="sidebar">
         <div>
             Step 1: List hubs on your account<br />
+            <div class="mb-3">
+                <input type="text" class="form-control" id="hubsCursor"
+                    placeholder="Any cursor? - e.g. Y3Vyc35NZz09fjUw">
+            </div>
             <button type="button" class="btn btn-primary" id="getHubs">List Hubs</button>
         </div>
         <hr />
@@ -29,6 +33,10 @@
                 <input type="text" class="form-control" id="hubId"
                     placeholder="HubId - e.g. b.768cae14-76b3-4531-9030-25212dab4e48">
             </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="projectsCursor"
+                    placeholder="Any cursor? - e.g. Y3Vyc35NZz09fjUw">
+            </div>
             <button type="button" class="btn btn-primary" id="getProjects">List Projects</button>
         </div>
         <hr />
@@ -37,6 +45,10 @@
             <div class="mb-3">
                 <input type="text" class="form-control" id="projectId" placeholder="ProjectId - e.g. YWlt...5Zg">
             </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="designsCursor"
+                    placeholder="Any cursor? - e.g. Y3Vyc35NZz09fjUw">
+              </div>
             <button type="button" class="btn btn-primary" id="getDesigns">List all designs</button>
         </div>
         <hr />
@@ -55,6 +67,10 @@
                         property.name.category==Doors and 'property.name.Element Context'==Instance</option>
                 </datalist>
             </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="takeoffCursor"
+                    placeholder="Any cursor? - e.g. Y3Vyc35NZz09fjUw">
+              </div>
             <button type="button" class="btn btn-primary" id="getTakeOff">Generate quantity takeoff</button>
         </div>
         <hr />

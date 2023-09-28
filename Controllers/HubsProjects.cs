@@ -1,47 +1,86 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GraphQL;
+using System;
+using Microsoft.AspNetCore.Authentication;
 
 public partial class AECCIMGraphQLController : ControllerBase
 {
     [HttpGet("hubs")]
-    public async Task<ActionResult<string>> GetHubs()
+    public async Task<ActionResult<string>> GetHubs(string? cursor)
     {
-        var hubs = new GraphQLRequest
+        var properties = new GraphQLRequest
         {
             Query = @"
-			    query {
-			        hubs {
+                query {
+                    hubs {
+                        pagination {
+                            cursor
+                        }
+                        results {
+                            id
+                            name
+                        }
+                    }
+                }",
+        };
+        if (!String.IsNullOrWhiteSpace(cursor))
+        {
+            properties.Query = $@"
+                query {{
+                    hubs (pagination:{{cursor:""{cursor}""}}){{
+                        pagination {{
+                           cursor
+                        }}
+                        results {{
+                            id
+                            name
+                        }}
+			        }}
+                }}";
+        }
+
+        return await Query(properties);
+    }
+
+    [HttpGet("hubs/{hubid}/projects")]
+    public async Task<ActionResult<string>> GetProjects(string hubId, string? cursor)
+    {
+        var properties = new GraphQLRequest
+        {
+            Query = @"
+			    query GetProjects ($hubId: ID!) {
+			        projects (hubId: $hubId) {
+                        pagination {
+                           cursor
+                        }
                         results {
                             id
                             name
                         }
 			        }
 			    }",
+            Variables = new
+            {
+                hubId = hubId
+            }
         };
-
-        return await Query(hubs);
-    }
-
-    [HttpGet("hubs/{hubid}/projects")]
-    public async Task<ActionResult<string>> GetProjects(string hubId)
-    {
-        var hubs = new GraphQLRequest
+        if (!String.IsNullOrWhiteSpace(cursor))
         {
-            Query = @"
-			    query GetProjects ($hubId: ID!) {
-			        projects (hubId: $hubId) {
-                        results {
+            properties.Query = $@"
+                query GetProjects ($hubId: ID!) {{
+			        projects (hubId: $hubId, pagination:{{cursor:""{cursor}""}}) {{
+                        pagination {{
+                           cursor
+                        }}
+                        results {{
                             id
                             name
-                        }
-			        }
-			    }", 
-                Variables = new {
-                    hubId = hubId
-                }
-        };
+                        }}
+			        }}
+			    }}";
+        }
 
-        return await Query(hubs);
+        return await Query(properties);
     }
 }
