@@ -25,7 +25,7 @@ In case your design is not in the first response and you receive a cursor value 
 
 ![Step 3](./images/allproperties.png)
 
-Query used:
+Query used in case no cursor is provided:
 
 ```
 aecDesignsByProject(projectId: $projectId) {
@@ -45,5 +45,36 @@ aecDesignsByProject(projectId: $projectId) {
       }
     }
   }
+}
+```
+
+Query used in case a valid cursor is provided:
+
+```
+aecDesignsByProject(projectId: $projectId, pagination:{cursor:"cursor string here"}) {
+  pagination{
+    pageSize
+    cursor
+  }
+  results{
+    name
+    id
+    propertyDefinitions{
+      results{
+        id
+        name
+        description
+        specification
+      }
+    }
+  }
+}
+```
+
+The variables are the same in both cases:
+
+```
+{
+  projectId = "Your project ID"
 }
 ```
