@@ -9,7 +9,7 @@ using GraphQL;
 [Route("api/graphql")]
 public partial class AECCIMGraphQLController : ControllerBase
 {
-    private const string BASE_URL = "https://developer.api.autodesk.com/aeccloudinformationmodel/2022-11/graphql";
+    private const string BASE_URL = "https://developer.api.autodesk.com/aecdatamodel/graphql";
     private static GraphQLHttpClient GraphQLClient;
     private readonly ILogger<AuthController> _logger;
     private readonly APS _aps;
