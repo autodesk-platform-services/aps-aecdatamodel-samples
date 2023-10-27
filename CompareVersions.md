@@ -28,16 +28,21 @@ In case your design is not in the first response and you receive a cursor value 
 ## Step 4: Generate versions elements
 
 Use the `designId` from step 3. Click on generate schedule. You may adjust he `version` field. [See C# code](/Controllers/Schedule.cs).
+In case your element is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click Compare Versions Properties button once more.
 
 ![Step 3](./images/comparedesigns.png)
 
 Query used:
 
 ```
-{
-  aecDesignByVersionNumber(designId:"your design id" , versionNumber:versionNumber ){
+query getVersionProperties($designId: ID!, $versionNumber: Int!){
+	aecDesignByVersionNumber(designId:$designId , versionNumber:$versionNumber ){
 		name
 		elements{
+			pagination{
+				pageSize
+				cursor
+			}
 			results{
 				id
 				name
@@ -55,4 +60,46 @@ Query used:
 			}
 		}
 	}
+}
+```
+
+Query used in case a valid cursor is provided:
+
+```
+query getVersionProperties($designId: ID!, $versionNumber: Int!){
+	aecDesignByVersionNumber(designId:$designId , versionNumber:$versionNumber , pagination:{cursor:"cursor"}){
+		name
+		elements{
+			pagination{
+				pageSize
+				cursor
+			}
+			results{
+				id
+				name
+				properties{
+					results{
+						name
+						value
+						propertyDefinition{
+							id
+							name
+							units
+						}
+					}
+				}
+			}
+		}
+	}
+}
+```
+
+The variables are the same in both cases:
+
+```
+{
+	designId = designId,
+	elementsfilter = elementsfilter,
+	referencefilter = referencefilter
+}
 ```

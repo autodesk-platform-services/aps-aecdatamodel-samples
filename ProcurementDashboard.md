@@ -28,37 +28,84 @@ In case your design is not in the first response and you receive a cursor value 
 ## Step 4: Generate furniture procurement data in a specific level
 
 Use the `designId` from step 3. Click on generate schedule. You may adjust he `filter` field. [See C# code](/Controllers/Schedule.cs).
+In case your element is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click Generate Procurement button once more.
 
 ![Step 3](./images/furnitureprocurement.png)
 
 Query used:
 
 ```
-elements(designId: "your design id", filter: { query: "property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'"}) {
-	pagination {
-		pageSize
-		cursor
-	}
-	results {
-		id
-		name
-		properties {
-			results {
-				name
-				value
-			}
+query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {
+	elements(designId: $designId, filter: { query: $elementsfilter}) {
+		pagination {
+			pageSize
+			cursor
 		}
-		referencedBy (name: ""Level"", filter: { query: "property.name.category==Furniture"}) {
-			results {
-				name
-				properties {
-					results {
-						name
-						value
+		results {
+			id
+			name
+			properties {
+				results {
+					name
+					value
+				}
+			}
+			referencedBy (name: ""Level"", filter: { query: $referencefilter}) {
+				results {
+					name
+					properties {
+						results {
+							name
+							value
+						}
 					}
 				}
 			}
 		}
 	}
+}
+```
+
+Query used in case a valid cursor is provided:
+
+```
+query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {
+	elements(designId: $designId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor"}) {
+		pagination {
+			pageSize
+			cursor
+		}
+		results {
+			id
+			name
+			properties {
+				results {
+					name
+					value
+				}
+			}
+			referencedBy (name: ""Level"", filter: { query: $referencefilter}) {
+				results {
+					name
+					properties {
+						results {
+							name
+							value
+						}
+					}
+				}
+			}
+		}
+	}
+}
+```
+
+The variables are the same in both cases:
+
+```
+{
+	designId = designId,
+	elementsfilter = elementsfilter,
+	referencefilter = referencefilter
 }
 ```

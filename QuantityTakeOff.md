@@ -28,20 +28,49 @@ In case your design is not in the first response and you receive a cursor value 
 ## Step 4: Generate quantity takeoff
 
 Use the `designId` from step 3. Click on generate quantity takeoff. You may adjust he `Category` field. [See C# code](/Controllers/QuantityTakeOff.cs).
+In case your element is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click Generate quantity takeoff button once more.
 
 ![Step 3](./images/quantity.png)
 
 GraphQL query used:
 
 ```
-elements (designId: "your design id", filter: { query: "property.name.category==Doors and 'property.name.Element Context'==Instance"}) {
-  pagination{
+query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
+  elements (designId: $designId, filter: { query: $elementsfilter}) {
+    pagination{
       pageSize
       cursor
+    }
+    results{
+      id
+      name
+    }
   }
-  results{
-    id
-    name
+}
+```
+
+Query used in case a valid cursor is provided:
+
+```
+query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
+  elements (designId: $designId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor"}) {
+    pagination{
+      pageSize
+      cursor
+    }
+    results{
+      id
+      name
+    }
   }
+}
+```
+
+The variables are the same in both cases:
+
+```
+{
+  designId = designId,
+  elementsfilter = elementsfilter
 }
 ```

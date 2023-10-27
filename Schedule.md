@@ -28,41 +28,44 @@ In case your design is not in the first response and you receive a cursor value 
 ## Step 4: Generate Schedule
 
 Use the `designId` from step 3. Click on generate schedule. You may adjust he `filter` field. [See C# code](/Controllers/Schedule.cs).
+In case your element is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click Generate scedule button once more.
 
 ![Step 3](./images/schedule.png)
 
 Query used:
 
 ```
-elements (designId: "your design id",filter: { query: "property.name.category==Windows and 'property.name.Element Context'==Instance"}){
-  pagination{
-    pageSize
-    cursor
-  }
-  results{
-    id
-    name
-    properties{
-      results{
-        name
-        value
-        displayValue
-        propertyDefinition{
-          units
+query GetSchedule($designId: ID!, $elementsfilter: String!){
+  elements (designId: $designId,filter: { query: $elementsfilter}){
+    pagination{
+      pageSize
+      cursor
+    }
+    results{
+      id
+      name
+      properties{
+        results{
+          name
+          value
+          displayValue
+          propertyDefinition{
+            units
+          }
         }
       }
-    }
-    references{
-      results{
-        name
-        value{
-          properties{
-            results{
-              name
-              value
-              displayValue
-              propertyDefinition{
-                units
+      references{
+        results{
+          name
+          value{
+            properties{
+              results{
+                name
+                value
+                displayValue
+                propertyDefinition{
+                  units
+                }
               }
             }
           }
@@ -70,5 +73,58 @@ elements (designId: "your design id",filter: { query: "property.name.category==W
       }
     }
   }
+}
+```
+
+Query used in case a valid cursor is provided:
+
+```
+query GetSchedule($designId: ID!, $elementsfilter: String!){
+  elements (designId: $designId,filter: { query: $elementsfilter}, pagination:{cursor:"cursor"}){
+    pagination{
+      pageSize
+      cursor
+    }
+    results{
+      id
+      name
+      properties{
+        results{
+          name
+          value
+          displayValue
+          propertyDefinition{
+            units
+          }
+        }
+      }
+      references{
+        results{
+          name
+          value{
+            properties{
+              results{
+                name
+                value
+                displayValue
+                propertyDefinition{
+                  units
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The variables are the same in both cases:
+
+```
+{
+  designId = designId,
+  elementsfilter = elementsfilter
 }
 ```
