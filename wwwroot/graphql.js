@@ -66,7 +66,7 @@ registerOnClick('getProcurement', async () => {
     if (designId === '') { writeResponse('Please provide the designId'); return; }
     if (referencefilter === '') { writeResponse('Please provide the reference filter'); return; }
     if (elementsfilter === '') { writeResponse('Please provide the elements filter'); return; }
-    let elements = await query(`/api/graphql/designs/${designId}/procurement?elementsfilter=${elementsfilter}'&referencefilter=${referencefilter}$cursor=${cursor}`);
+    let elements = await query(`/api/graphql/designs/${designId}/procurement?elementsfilter=${elementsfilter}'&referencefilter=${referencefilter}&cursor=${cursor}`);
     writeResponse(elements);
 });
 
