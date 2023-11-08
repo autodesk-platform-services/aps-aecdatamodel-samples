@@ -18,16 +18,23 @@ public partial class AECCIMGraphQLController : ControllerBase
 						cursor
 					}
 					results {
+						id
 						name
-						properties (filter: {names: [""Name""]}){
+						properties (filter: {names: [""Element Name""]}){
 							results {
+								name
 								value
 							}
 						}
 						referencedBy (name: ""Level"", filter: { query: $referencefilter}) {
-							totalCount
 							results {
 								name
+								properties (filter: {names: [""Family Name"", ""Element Name""]}) {
+									results {
+										name
+										value
+									}
+								}
 							}
 						}
 					}
@@ -50,16 +57,23 @@ public partial class AECCIMGraphQLController : ControllerBase
 						cursor
 					}}
 					results {{
+						id
 						name
-						properties (filter: {{names: [""Name""]}}) {{
+						properties (filter: {{names: [""Element Name""]}}) {{
 							results {{
+								name
 								value
 							}}
 						}}
 						referencedBy (name: ""Level"", filter: {{ query: $referencefilter}}) {{
-							totalCount
 							results {{
 								name
+								properties (filter: {{names: [""Family Name"", ""Element Name""]}}) {{
+									results {{
+										name
+										value
+									}}
+								}}
 							}}
 						}}
 					}}
