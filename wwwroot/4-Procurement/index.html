@@ -60,18 +60,18 @@
       </div>
       <div class="mb-3">
         <input type="text" class="form-control" id="referencefilter"
-          placeholder="property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'"
+          placeholder="property.name.category==Furniture"
           list="referencefilterList" >
         <datalist id="referencefilterList">
-          <option value="property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'">
-            property.name.category=contains='Level' and 'property.name.Element Name'=contains='L5'</option>
+          <option value="property.name.category==Furniture">property.name.category==Furniture</option>
         </datalist>
       </div>
       <div class="mb-3">
         <input type="text" class="form-control" id="elementsfilter"
-          placeholder="Category filter name - e.g. property.name.category==Furniture" list="elementsfilterList" >
+          placeholder="property.name.category=='Levels' and 'property.name.Element Context'==Instance" list="elementsfilterList" >
         <datalist id="elementsfilterList">
-          <option value="property.name.category==Furniture">property.name.category==Furniture</option>
+          <option value="property.name.category=='Levels' and 'property.name.Element Context'==Instance">
+            property.name.category=='Levels' and 'property.name.Element Context'==Instance</option>
         </datalist>
       </div>
       <div class="mb-3">

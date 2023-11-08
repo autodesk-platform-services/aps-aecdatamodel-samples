@@ -20,7 +20,7 @@ public partial class AECCIMGraphQLController : ControllerBase
 					results {
 						id
 						name
-						properties {
+						properties (filter: {names: [""Element Name""]}){
 							results {
 								name
 								value
@@ -29,7 +29,7 @@ public partial class AECCIMGraphQLController : ControllerBase
 						referencedBy (name: ""Level"", filter: { query: $referencefilter}) {
 							results {
 								name
-								properties {
+								properties (filter: {names: [""Family Name"", ""Element Name""]}) {
 									results {
 										name
 										value
@@ -59,7 +59,7 @@ public partial class AECCIMGraphQLController : ControllerBase
 					results {{
 						id
 						name
-						properties {{
+						properties (filter: {{names: [""Element Name""]}}) {{
 							results {{
 								name
 								value
@@ -68,7 +68,7 @@ public partial class AECCIMGraphQLController : ControllerBase
 						referencedBy (name: ""Level"", filter: {{ query: $referencefilter}}) {{
 							results {{
 								name
-								properties {{
+								properties (filter: {{names: [""Family Name"", ""Element Name""]}}) {{
 									results {{
 										name
 										value

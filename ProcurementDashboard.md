@@ -44,16 +44,16 @@ query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referen
 		results {
 			id
 			name
-			properties {
+			properties (filter: {names: ["Element Name"]}){
 				results {
 					name
 					value
 				}
 			}
-			referencedBy (name: ""Level"", filter: { query: $referencefilter}) {
+			referencedBy (name: "Level", filter: { query: $referencefilter}) {
 				results {
 					name
-					properties {
+					properties (filter: {names: [""Family Name"", ""Element Name""]}) {
 						results {
 							name
 							value
@@ -70,7 +70,7 @@ Query used in case a valid cursor is provided:
 
 ```
 query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {
-	elements(designId: $designId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor"}) {
+	elements(designId: $designId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor string here"}) {
 		pagination {
 			pageSize
 			cursor
@@ -78,16 +78,16 @@ query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referen
 		results {
 			id
 			name
-			properties {
+			properties (filter: {names: ["Element Name"]}){
 				results {
 					name
 					value
 				}
 			}
-			referencedBy (name: ""Level"", filter: { query: $referencefilter}) {
+			referencedBy (name: "Level", filter: { query: $referencefilter}) {
 				results {
 					name
-					properties {
+					properties (filter: {names: [""Family Name"", ""Element Name""]}) {
 						results {
 							name
 							value
@@ -104,7 +104,7 @@ The variables are the same in both cases:
 
 ```
 {
-	designId = designId,
+	designId = "Your design ID",
 	elementsfilter = elementsfilter,
 	referencefilter = referencefilter
 }
