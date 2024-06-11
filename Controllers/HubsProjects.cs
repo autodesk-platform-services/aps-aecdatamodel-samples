@@ -4,7 +4,7 @@ using GraphQL;
 using System;
 using Microsoft.AspNetCore.Authentication;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
     [HttpGet("hubs")]
     public async Task<ActionResult<string>> GetHubs(string? cursor)

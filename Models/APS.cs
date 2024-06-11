@@ -1,5 +1,7 @@
 using System;
-using Autodesk.Forge;
+using System.Collections.Generic;
+using Autodesk.Authentication;
+using Autodesk.Authentication.Model;
 
 public class Tokens
 {
@@ -14,8 +16,9 @@ public partial class APS
     private readonly string _clientId;
     private readonly string _clientSecret;
     private readonly string _callbackUri;
-    private readonly Scope[] InternalTokenScopes = new Scope[] { Scope.DataRead, Scope.ViewablesRead };
-    private readonly Scope[] PublicTokenScopes = new Scope[] { Scope.ViewablesRead };
+    private readonly AuthenticationClient _authClient;
+    private readonly List<Scopes> InternalTokenScopes = new List<Scopes> { Scopes.DataRead, Scopes.ViewablesRead };
+    private readonly List<Scopes> PublicTokenScopes = new List<Scopes> { Scopes.DataRead, Scopes.ViewablesRead };
 
     public APS(string clientId, string clientSecret, string callbackUri)
     {

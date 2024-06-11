@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using System;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
   [HttpGet("projects/{projectId}/properties")]
   public async Task<ActionResult<string>> GetProperties(string projectId, string? cursor)

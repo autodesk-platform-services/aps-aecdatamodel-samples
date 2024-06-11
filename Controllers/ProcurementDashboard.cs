@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using System;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
 	[HttpGet("designs/{designId}/procurement")]
 	public async Task<ActionResult<string>> GetFurnitureProcurement(string designId, string elementsfilter, string referencefilter, string? cursor)

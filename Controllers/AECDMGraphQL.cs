@@ -7,14 +7,14 @@ using GraphQL;
 
 [ApiController]
 [Route("api/graphql")]
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
     private const string BASE_URL = "https://developer.api.autodesk.com/aecdatamodel/graphql";
     private static GraphQLHttpClient GraphQLClient;
     private readonly ILogger<AuthController> _logger;
     private readonly APS _aps;
 
-    public AECCIMGraphQLController(ILogger<AuthController> logger, APS aps)
+    public AECDMGraphQLController(ILogger<AuthController> logger, APS aps)
     {
         _logger = logger;
         _aps = aps;

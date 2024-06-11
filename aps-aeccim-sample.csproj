@@ -3,7 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autodesk.Forge" Version="1.9.9" />
+    <PackageReference Include="Autodesk.Authentication" Version="1.0.0" />
     <PackageReference Include="GraphQL.Client" Version="5.1.0" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="5.1.0" />
   </ItemGroup>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using System;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
     [HttpGet("designs/{designId}/takeoff/{elementsfilter}")]
     public async Task<ActionResult<string>> GetQuantityTakeOff(string designId, string elementsfilter, string? cursor)

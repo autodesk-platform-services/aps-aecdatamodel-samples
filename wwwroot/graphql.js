@@ -16,17 +16,17 @@ registerOnClick('getProjects', async () => {
     writeResponse(projects)
 });
 
-registerOnClick('getDesigns', async () => {
-    let cursor = document.getElementById('designsCursor').value;
+registerOnClick('getElementGroups', async () => {
+    let cursor = document.getElementById('elementGroupsCursor').value;
     let hubid = document.getElementById('hubId').value;
     let projectId = document.getElementById('projectId').value;
     if (hubid === '') { writeResponse('Please provide the HubId'); return; }
     if (projectId === '') { writeResponse('Please provide the ProjectId'); return; }
-    let designs = await query(`/api/graphql/projects/${projectId}/designs?=cursor${cursor}`);
-    writeResponse(designs)
+    let elementGroups = await query(`/api/graphql/projects/${projectId}/elementGroups?=cursor${cursor}`);
+    writeResponse(elementGroups)
 });
 
-// Sample 1 Design validation
+// Sample 1 ElementGroup validation
 registerOnClick('getPropeties', async () => {
     let cursor = document.getElementById('propertiesCursor').value;
     let projectId = document.getElementById('projectId').value;
@@ -38,50 +38,50 @@ registerOnClick('getPropeties', async () => {
 // Sample 2 Quantity Take off
 registerOnClick('getTakeOff', async () => {
     let cursor = document.getElementById('takeoffCursor').value;
-    let designId = document.getElementById('designId').value;
+    let elementgroupId = document.getElementById('elementgroupId').value;
     let elementsfilter = document.getElementById('elementsfilter').value;
-    if (designId === '') { writeResponse('Please provide the designId'); return; }
+    if (elementgroupId === '') { writeResponse('Please provide the elementgroupId'); return; }
     if (elementsfilter === '') { writeResponse('Please provide the elements filter'); return; }
-    let elements = await query(`/api/graphql/designs/${designId}/takeoff/${elementsfilter}?cursor=${cursor}`);
+    let elements = await query(`/api/graphql/elementgroups/${elementgroupId}/takeoff/${elementsfilter}?cursor=${cursor}`);
     writeResponse(elements);
 });
 
 // Sample 3 Schedule
 registerOnClick('getSchedule', async () => {
     let cursor = document.getElementById('scheduleCursor').value;
-    let designId = document.getElementById('designId').value;
+    let elementgroupId = document.getElementById('elementgroupId').value;
     let elementsfilter = document.getElementById('elementsFilter').value;
-    if (designId === '') { writeResponse('Please provide the HubId'); return; }
+    if (elementgroupId === '') { writeResponse('Please provide the elementgroupId'); return; }
     if (elementsfilter === '') { writeResponse('Please provide the elements filter'); return; }
-    let elements = await query(`/api/graphql/designs/${designId}/schedule/${elementsfilter}?cursor=${cursor}`);
+    let elements = await query(`/api/graphql/elementgroups/${elementgroupId}/schedule/${elementsfilter}?cursor=${cursor}`);
     writeResponse(elements);
 });
 
 // Sample 4 Procurement
 registerOnClick('getProcurement', async () => {
     let cursor = document.getElementById('procurementCursor').value;
-    let designId = document.getElementById('designId').value;
+    let elementgroupId = document.getElementById('elementgroupId').value;
     let referencefilter = document.getElementById('referencefilter').value;
     let elementsfilter = document.getElementById('elementsfilter').value;
-    if (designId === '') { writeResponse('Please provide the designId'); return; }
+    if (elementgroupId === '') { writeResponse('Please provide the elementgroupId'); return; }
     if (referencefilter === '') { writeResponse('Please provide the reference filter'); return; }
     if (elementsfilter === '') { writeResponse('Please provide the elements filter'); return; }
-    let elements = await query(`/api/graphql/designs/${designId}/procurement?elementsfilter=${elementsfilter}&referencefilter=${referencefilter}&cursor=${cursor}`);
+    let elements = await query(`/api/graphql/elementgroups/${elementgroupId}/procurement?elementsfilter=${elementsfilter}&referencefilter=${referencefilter}&cursor=${cursor}`);
     writeResponse(elements);
 });
 
 // Sample 5 Schedule
 registerOnClick('getComparision', async () => {
-    let designId = document.getElementById('designId').value;
+    let elementgroupId = document.getElementById('elementgroupId').value;
     let versionone = document.getElementById('versionone').value;
     let cursorOne = document.getElementById('compareCursorOne').value;
     let versiontwo = document.getElementById('versiontwo').value;
     let cursorTwo = document.getElementById('compareCursorTwo').value;
-    if (designId === '') { writeResponse('Please provide the HubId'); return; }
+    if (elementgroupId === '') { writeResponse('Please provide the HubId'); return; }
     if (versionone === '') { writeResponse('Please provide the reference version'); return; }
     if (versiontwo === '') { writeResponse('Please provide the version to compare'); return; }
-    let elementsv1 = await query(`/api/graphql/designs/${designId}/version/${versionone}?cursor=${cursorOne}`);
-    let elementsv2 = await query(`/api/graphql/designs/${designId}/version/${versiontwo}?cursor=${cursorTwo}`);
+    let elementsv1 = await query(`/api/graphql/elementgroups/${elementgroupId}/version/${versionone}?cursor=${cursorOne}`);
+    let elementsv2 = await query(`/api/graphql/elementgroups/${elementgroupId}/version/${versiontwo}?cursor=${cursorTwo}`);
     writeResponse(elementsv1);
     writeResponse2(elementsv2);
 });
