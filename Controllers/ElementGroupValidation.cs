@@ -11,8 +11,8 @@ public partial class AECDMGraphQLController : ControllerBase
     var properties = new GraphQLRequest
     {
       Query = @"
-			    query getDesignValidation($projectId: ID!) {
-            aecDesignsByProject(projectId: $projectId) {
+			    query getElementGroupValidation($projectId: ID!) {
+            elementGroupsByProject(projectId: $projectId) {
               pagination{
                 pageSize
                 cursor
@@ -39,8 +39,8 @@ public partial class AECDMGraphQLController : ControllerBase
     if (!String.IsNullOrWhiteSpace(cursor))
     {
       properties.Query = $@"
-      query getDesignValidation($projectId: ID!) {{
-        aecDesignsByProject(projectId: $projectId, pagination:{{cursor:""{cursor}""}}) {{
+      query getElementGroupValidation($projectId: ID!) {{
+        elementGroupsByProject(projectId: $projectId, pagination:{{cursor:""{cursor}""}}) {{
           pagination{{
             pageSize
             cursor

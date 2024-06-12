@@ -1,24 +1,24 @@
-const login = document.getElementById('login');
+const signin = document.getElementById('signin');
 try {
     const resp = await fetch('/api/auth/profile');
     if (resp.ok) {
         const user = await resp.json();
-        login.innerText = `Logout (${user.name})`;
-        login.onclick = () => {
+        signin.innerText = `Sign out (${user.name})`;
+        signin.onclick = () => {
             const iframe = document.createElement('iframe');
             iframe.style.visibility = 'hidden';
             iframe.src = 'https://accounts.autodesk.com/Authentication/LogOut';
             document.body.appendChild(iframe);
             iframe.onload = () => {
-                window.location.replace('/api/auth/logout');
+                window.location.replace('/api/auth/signout');
                 document.body.removeChild(iframe);
             };
         }
     } else {
-        login.innerText = 'Login';
-        login.onclick = () => window.location.replace('/api/auth/login');
+        signin.innerText = 'Sign in';
+        signin.onclick = () => window.location.replace('/api/auth/signin');
     }
-    login.style.visibility = 'visible';
+    signin.style.visibility = 'visible';
 } catch (err) {
     alert('Could not initialize the application. See console for more details.');
     console.error(err);

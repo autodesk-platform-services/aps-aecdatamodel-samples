@@ -35,9 +35,9 @@ public partial class APS
 		};
 	}
 
-	public async Task<dynamic> GetUserProfile(Tokens tokens)
+	public async Task<UserInfo> GetUserProfile(Tokens tokens)
 	{
-		var userInfo = await _authClient.GetUserInfoAsync(tokens.InternalToken);
+		UserInfo userInfo = await _authClient.GetUserInfoAsync(tokens.InternalToken);
 		return userInfo;
 	}
 }

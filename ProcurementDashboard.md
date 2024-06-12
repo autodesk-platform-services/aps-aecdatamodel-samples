@@ -18,16 +18,16 @@ In case your project is not in the first response and you receive a cursor value
 
 ![Step 2](./images/projects.png)
 
-## Step 3: List all designs in a project
+## Step 3: List all elementgroups in a project
 
-This step uses `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs).
-In case your design is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List all designs button once more.
+This step uses `projectId`. Take note of the `elementGroupId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/ElementGroups.cs).
+In case your elementgroup is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List all elementgroups button once more.
 
 ![Step 3](./images/designs.png)
 
 ## Step 4: Generate furniture procurement data in a specific level
 
-Use the `designId` from step 3. Click on generate schedule. You may adjust he `filter` field. [See C# code](/Controllers/Schedule.cs).
+Use the `elementGroupId` from step 3. Click on generate schedule. You may adjust he `filter` field. [See C# code](/Controllers/Schedule.cs).
 In case your element is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click Generate Procurement button once more.
 
 ![Step 3](./images/furnitureprocurement.png)
@@ -35,8 +35,8 @@ In case your element is not in the first response and you receive a cursor value
 Query used:
 
 ```
-query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {
-	elements(designId: $designId, filter: { query: $elementsfilter}) {
+query GetFurnitureProcurement($elementGroupId: ID!, $elementsfilter: String!, $referencefilter: String!) {
+	elements(elementGroupId: $elementGroupId, filter: { query: $elementsfilter}) {
 		pagination {
 			pageSize
 			cursor
@@ -69,8 +69,8 @@ query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referen
 Query used in case a valid cursor is provided:
 
 ```
-query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {
-	elements(designId: $designId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor string here"}) {
+query GetFurnitureProcurement($elementGroupId: ID!, $elementsfilter: String!, $referencefilter: String!) {
+	elements(elementGroupId: $elementGroupId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor string here"}) {
 		pagination {
 			pageSize
 			cursor
@@ -104,7 +104,7 @@ The variables are the same in both cases:
 
 ```
 {
-	designId = "Your design ID",
+	elementGroupId = "Your elementGroup ID",
 	elementsfilter = elementsfilter,
 	referencefilter = referencefilter
 }

@@ -18,16 +18,16 @@ In case your project is not in the first response and you receive a cursor value
 
 ![Step 2](./images/projects.png)
 
-## Step 3: List all designs in a project
+## Step 3: List all elementgroups in a project
 
-This step uses `projectId`. Take note of the `designId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/Designs.cs).
-In case your design is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List all designs button once more.
+This step uses `projectId`. Take note of the `elementGroupId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/ElementGroups.cs).
+In case your elementgroup is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List all elementgroups button once more.
 
 ![Step 3](./images/designs.png)
 
 ## Step 4: Generate versions elements
 
-Use the `designId` from step 3. Click on generate schedule. You may adjust he `version` field. [See C# code](/Controllers/Schedule.cs).
+Use the `elementGroupId` from step 3. Click on generate schedule. You may adjust he `version` field. [See C# code](/Controllers/Schedule.cs).
 In case your element is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click Compare Versions Properties button once more.
 
 ![Step 3](./images/comparedesigns.png)
@@ -35,8 +35,8 @@ In case your element is not in the first response and you receive a cursor value
 Query used:
 
 ```
-query getVersionProperties($designId: ID!, $versionNumber: Int!){
-	aecDesignByVersionNumber(designId:$designId , versionNumber:$versionNumber ){
+query getVersionProperties($elementGroupId: ID!, $versionNumber: Int!){
+	elementGroupByVersionNumber(elementGroupId:$elementGroupId , versionNumber:$versionNumber ){
 		name
 		elements{
 			pagination{
@@ -50,10 +50,12 @@ query getVersionProperties($designId: ID!, $versionNumber: Int!){
 					results{
 						name
 						value
-						propertyDefinition{
+						definition{
 							id
 							name
-							units
+							units{
+								name
+							}
 						}
 					}
 				}
@@ -66,8 +68,8 @@ query getVersionProperties($designId: ID!, $versionNumber: Int!){
 Query used in case a valid cursor is provided:
 
 ```
-query getVersionProperties($designId: ID!, $versionNumber: Int!){
-	aecDesignByVersionNumber(designId:$designId , versionNumber:$versionNumber , pagination:{cursor:"cursor"}){
+query getVersionProperties($elementGroupId: ID!, $versionNumber: Int!){
+	elementGroupByVersionNumber(elementGroupId:$elementGroupId , versionNumber:$versionNumber , pagination:{cursor:"cursor"}){
 		name
 		elements{
 			pagination{
@@ -81,10 +83,12 @@ query getVersionProperties($designId: ID!, $versionNumber: Int!){
 					results{
 						name
 						value
-						propertyDefinition{
+						definition{
 							id
 							name
-							units
+							units{
+								name
+							}
 						}
 					}
 				}
@@ -98,7 +102,7 @@ The variables are the same in both cases:
 
 ```
 {
-	designId = designId,
+	elementGroupId = elementGroupId,
 	elementsfilter = elementsfilter,
 	referencefilter = referencefilter
 }

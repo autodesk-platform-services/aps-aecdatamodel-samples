@@ -12,7 +12,7 @@ public partial class AECDMGraphQLController : ControllerBase
 		{
 			Query = @"
 				query getVersionProperties($elementGroupId: ID!, $versionNumber: Int!){
-					elementGroupByVersionNumber(elementGroupId:$designId , versionNumber:$versionNumber ){
+					elementGroupByVersionNumber(elementGroupId:$elementGroupId , versionNumber:$versionNumber ){
 					name
 					elements{
 						pagination{

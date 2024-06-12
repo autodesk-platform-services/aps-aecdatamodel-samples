@@ -1,4 +1,4 @@
-## Design Validation Sample Workflow
+## ElementGroup Validation Sample Workflow
 
 Validating data property names, units and types used across designs in a project is a valuable QA/QC process that can now be automated using the AEC CIM APIs.
 
@@ -21,14 +21,14 @@ In case your project is not in the first response and you receive a cursor value
 ## Step 3: List all properties
 
 This step uses `projectId`. Click on List all properties. [See C# code](/Controllers/DesignValidation.cs).
-In case your design is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List Hubs button once more.
+In case your elementgroup is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List Hubs button once more.
 
 ![Step 3](./images/allproperties.png)
 
 Query used in case no cursor is provided:
 
 ```
-aecDesignsByProject(projectId: $projectId) {
+elementGroupsByProject(projectId: $projectId) {
   pagination{
     pageSize
     cursor
@@ -51,7 +51,7 @@ aecDesignsByProject(projectId: $projectId) {
 Query used in case a valid cursor is provided:
 
 ```
-aecDesignsByProject(projectId: $projectId, pagination:{cursor:"cursor string here"}) {
+elementGroupsByProject(projectId: $projectId, pagination:{cursor:"cursor string here"}) {
   pagination{
     pageSize
     cursor

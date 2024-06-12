@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Autodesk.Authentication;
 using Autodesk.Authentication.Model;
+using Autodesk.SDKManager;
 
 public class Tokens
 {
@@ -25,5 +26,9 @@ public partial class APS
         _clientId = clientId;
         _clientSecret = clientSecret;
         _callbackUri = callbackUri;
+        SDKManager sdkManager = SdkManagerBuilder
+        .Create() // Creates SDK Manager Builder itself.
+        .Build();
+        _authClient = new AuthenticationClient(sdkManager);
     }
 }
