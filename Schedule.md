@@ -63,8 +63,10 @@ query GetSchedule($elementGroupId: ID!, $elementsfilter: String!){
                 name
                 value
                 displayValue
-                propertyDefinition{
-                  units
+                definition{
+                  units{
+                    name
+                  }
                 }
               }
             }
