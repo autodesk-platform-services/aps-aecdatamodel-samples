@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using System;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
-	[HttpGet("/api/graphql/designs/{designId}/version/{versionNumber}")]
-	public async Task<ActionResult<string>> GetFurnitureProcurement(string designId, int versionNumber, string cursor)
+	[HttpGet("/api/graphql/elementgroups/{elementGroupId}/version/{versionNumber}")]
+	public async Task<ActionResult<string>> GetFurnitureProcurement(string elementGroupId, int versionNumber, string cursor)
 	{
 		var properties = new GraphQLRequest
 		{
 			Query = @"
-				query getVersionProperties($designId: ID!, $versionNumber: Int!){
-					aecDesignByVersionNumber(designId:$designId , versionNumber:$versionNumber ){
+				query getVersionProperties($elementGroupId: ID!, $versionNumber: Int!){
+					elementGroupByVersionNumber(elementGroupId:$elementGroupId , versionNumber:$versionNumber ){
 					name
 					elements{
 						pagination{
@@ -26,10 +26,12 @@ public partial class AECCIMGraphQLController : ControllerBase
 								results{
 									name
 									value
-									propertyDefinition{
+									definition{
 										id
 										name
-										units
+										units{
+											name
+										}
 									}
 								}
 							}
@@ -39,15 +41,15 @@ public partial class AECCIMGraphQLController : ControllerBase
 			}",
 			Variables = new
 			{
-				designId = designId,
+				elementGroupId = elementGroupId,
 				versionNumber = versionNumber
 			}
 		};
 		if (!String.IsNullOrWhiteSpace(cursor))
 		{
 			properties.Query = $@"
-			query getVersionProperties($designId: ID!, $versionNumber: Int!){{
-					aecDesignByVersionNumber(designId:$designId , versionNumber:$versionNumber, pagination:{{cursor:""{cursor}""}} ){{
+			query getVersionProperties($elementGroupId: ID!, $versionNumber: Int!){{
+					elementGroupByVersionNumber(elementGroupId:$elementGroupId , versionNumber:$versionNumber, pagination:{{cursor:""{cursor}""}} ){{
 					name
 					elements{{
 						pagination{{
@@ -61,10 +63,12 @@ public partial class AECCIMGraphQLController : ControllerBase
 								results{{
 									name
 									value
-									propertyDefinition{{
+									definition{{
 										id
 										name
-										units
+										units{{
+											name
+										}}
 									}}
 								}}
 							}}

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Autodesk.Authentication.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -41,14 +42,14 @@ public class AuthController : ControllerBase
         return tokens;
     }
 
-    [HttpGet("login")]
+    [HttpGet("signin")]
     public ActionResult Login()
     {
         var redirectUri = _aps.GetAuthorizationURL();
         return Redirect(redirectUri);
     }
 
-    [HttpGet("logout")]
+    [HttpGet("signout")]
     public ActionResult Logout()
     {
         Response.Cookies.Delete("public_token");
@@ -77,10 +78,10 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
-        dynamic profile = await _aps.GetUserProfile(tokens);
+        UserInfo profile = await _aps.GetUserProfile(tokens);
         return new
         {
-            name = string.Format("{0} {1}", profile.firstName, profile.lastName)
+            name = profile.Name
         };
     }
 

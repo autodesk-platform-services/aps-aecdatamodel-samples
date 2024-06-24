@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using System;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
-	[HttpGet("designs/{designId}/procurement")]
-	public async Task<ActionResult<string>> GetFurnitureProcurement(string designId, string elementsfilter, string referencefilter, string? cursor)
+	[HttpGet("elementgroups/{elementGroupId}/procurement")]
+	public async Task<ActionResult<string>> GetFurnitureProcurement(string elementGroupId, string elementsfilter, string referencefilter, string? cursor)
 	{
 		var properties = new GraphQLRequest
 		{
 			Query = @"
-			query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {
-				elements(designId: $designId, filter: { query: $elementsfilter}) {
+			query GetFurnitureProcurement($elementGroupId: ID!, $elementsfilter: String!, $referencefilter: String!) {
+				elementsByElementGroup(elementGroupId: $elementGroupId, filter: { query: $elementsfilter}) {
 					pagination {
 						pageSize
 						cursor
@@ -42,7 +42,7 @@ public partial class AECCIMGraphQLController : ControllerBase
 			}",
 			Variables = new
 			{
-				designId = designId,
+				elementGroupId = elementGroupId,
 				elementsfilter = elementsfilter,
 				referencefilter = referencefilter
 			}
@@ -50,8 +50,8 @@ public partial class AECCIMGraphQLController : ControllerBase
 		if (!String.IsNullOrWhiteSpace(cursor))
 		{
 			properties.Query = $@"
-			query GetFurnitureProcurement($designId: ID!, $elementsfilter: String!, $referencefilter: String!) {{
-				elements(designId: $designId, filter: {{ query: $elementsfilter}}, pagination:{{cursor:""{cursor}""}}) {{
+			query GetFurnitureProcurement($elementGroupId: ID!, $elementsfilter: String!, $referencefilter: String!) {{
+				elementsByElementGroup(elementGroupId: $elementGroupId, filter: {{ query: $elementsfilter}}, pagination:{{cursor:""{cursor}""}}) {{
 					pagination {{
 						pageSize
 						cursor

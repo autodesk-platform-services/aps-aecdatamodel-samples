@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using System;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
-	[HttpGet("designs/{designId}/schedule/{elementsfilter}")]
-	public async Task<ActionResult<string>> GetSchedule(string designId, string elementsfilter, string? cursor)
+	[HttpGet("elementgroups/{elementGroupId}/schedule/{elementsfilter}")]
+	public async Task<ActionResult<string>> GetSchedule(string elementGroupId, string elementsfilter, string? cursor)
 	{
 		var properties = new GraphQLRequest
 		{
 			Query = @"
-			query GetSchedule($designId: ID!, $elementsfilter: String!){
-				elements (designId: $designId,filter: { query: $elementsfilter}){
+			query GetSchedule($elementGroupId: ID!, $elementsfilter: String!){
+				elementsByElementGroup(elementGroupId: $elementGroupId,filter: { query: $elementsfilter}){
 					pagination{
 						pageSize
 						cursor
@@ -25,8 +25,10 @@ public partial class AECCIMGraphQLController : ControllerBase
 								name
 								value
 								displayValue
-								propertyDefinition{
-									units
+								definition{
+									units{
+										name
+									}
 								}
 							}
 						}
@@ -39,8 +41,10 @@ public partial class AECCIMGraphQLController : ControllerBase
 											name
 											value
 											displayValue
-											propertyDefinition{
-												units
+											definition{
+												units{
+													name
+												}
 											}
 										}
 									}
@@ -52,15 +56,15 @@ public partial class AECCIMGraphQLController : ControllerBase
 			}",
 			Variables = new
 			{
-				designId = designId,
+				elementGroupId = elementGroupId,
 				elementsfilter = elementsfilter
 			}
 		};
 		if (!String.IsNullOrWhiteSpace(cursor))
 		{
 			properties.Query = $@"
-			query GetSchedule($designId: ID!, $elementsfilter: String!){{
-				elements (designId: $designId,filter: {{ query: $elementsfilter}}, pagination:{{cursor:""{cursor}""}}){{
+			query GetSchedule($elementGroupId: ID!, $elementsfilter: String!){{
+				elementsByElementGroup(elementGroupId: $elementGroupId,filter: {{ query: $elementsfilter}}, pagination:{{cursor:""{cursor}""}}){{
 					pagination{{
 						pageSize
 						cursor
@@ -73,8 +77,10 @@ public partial class AECCIMGraphQLController : ControllerBase
 								name
 								value
 								displayValue
-								propertyDefinition{{
-									units
+								definition{{
+									units{{
+										name
+									}}
 								}}
 							}}
 						}}
@@ -87,8 +93,10 @@ public partial class AECCIMGraphQLController : ControllerBase
 											name
 											value
 											displayValue
-											propertyDefinition{{
-												units
+											definition{{
+												units{{
+													name
+												}}
 											}}
 										}}
 									}}

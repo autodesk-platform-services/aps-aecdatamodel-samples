@@ -18,16 +18,16 @@ In case your project is not in the first response and you receive a cursor value
 
 ![Step 2](./images/projects.png)
 
-## Step 3: List all designs in a project
+## Step 3: List all elementgroups in a project
 
-This step uses `projectId`. Take note of the `designId` of the desired file (in this image, `racadvancedsampleproject-3.rvt`). [See C# code](/Controllers/Designs.cs).
-In case your design is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List all designs button once more.
+This step uses `projectId`. Take note of the `elementGroupId` of the desired file (in this image, `racadvancedsampleproject-3.rvt`). [See C# code](/Controllers/ElementGroups.cs).
+In case your elementgroup is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List all elementgroups button once more.
 
 ![Step 3](./images/designs.png)
 
 ## Step 4: Generate quantity takeoff
 
-Use the `designId` from step 3. Click on generate quantity takeoff. You may adjust he `Category` field. [See C# code](/Controllers/QuantityTakeOff.cs).
+Use the `elementGroupId` from step 3. Click on generate quantity takeoff. You may adjust he `Category` field. [See C# code](/Controllers/QuantityTakeOff.cs).
 In case your element is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click Generate quantity takeoff button once more.
 
 ![Step 3](./images/quantity.png)
@@ -35,8 +35,8 @@ In case your element is not in the first response and you receive a cursor value
 GraphQL query used:
 
 ```
-query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
-  elements (designId: $designId, filter: { query: $elementsfilter}) {
+query getQuantityTakeoff ($elementGroupId: ID!, $elementsfilter: String!){
+  elementsByElementGroup(elementGroupId: $elementGroupId, filter: { query: $elementsfilter}) {
     pagination{
       pageSize
       cursor
@@ -52,8 +52,8 @@ query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
 Query used in case a valid cursor is provided:
 
 ```
-query getQuantityTakeoff ($designId: ID!, $elementsfilter: String!){
-  elements (designId: $designId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor"}) {
+query getQuantityTakeoff ($elementGroupId: ID!, $elementsfilter: String!){
+  elementsByElementGroup(elementGroupId: $elementGroupId, filter: { query: $elementsfilter}, pagination:{cursor:"cursor"}) {
     pagination{
       pageSize
       cursor
@@ -70,7 +70,7 @@ The variables are the same in both cases:
 
 ```
 {
-  designId = designId,
+  elementGroupId = elementGroupId,
   elementsfilter = elementsfilter
 }
 ```

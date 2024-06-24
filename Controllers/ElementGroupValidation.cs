@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using System;
 
-public partial class AECCIMGraphQLController : ControllerBase
+public partial class AECDMGraphQLController : ControllerBase
 {
   [HttpGet("projects/{projectId}/properties")]
   public async Task<ActionResult<string>> GetProperties(string projectId, string? cursor)
@@ -11,8 +11,8 @@ public partial class AECCIMGraphQLController : ControllerBase
     var properties = new GraphQLRequest
     {
       Query = @"
-			    query getDesignValidation($projectId: ID!) {
-            aecDesignsByProject(projectId: $projectId) {
+			    query getElementGroupValidation($projectId: ID!) {
+            elementGroupsByProject(projectId: $projectId) {
               pagination{
                 pageSize
                 cursor
@@ -39,8 +39,8 @@ public partial class AECCIMGraphQLController : ControllerBase
     if (!String.IsNullOrWhiteSpace(cursor))
     {
       properties.Query = $@"
-      query getDesignValidation($projectId: ID!) {{
-        aecDesignsByProject(projectId: $projectId, pagination:{{cursor:""{cursor}""}}) {{
+      query getElementGroupValidation($projectId: ID!) {{
+        elementGroupsByProject(projectId: $projectId, pagination:{{cursor:""{cursor}""}}) {{
           pagination{{
             pageSize
             cursor
