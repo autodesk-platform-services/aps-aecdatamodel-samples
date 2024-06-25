@@ -12,7 +12,7 @@ public partial class AECDMGraphQLController : ControllerBase
     {
       Query = @"
 			    query getElementGroupValidation($projectId: ID!) {
-            elementGroupsByProject(projectId: $projectId) {
+            elementGroupsByProject(projectId: $projectId, pagination:{limit:10}) {
               pagination{
                 pageSize
                 cursor
@@ -40,7 +40,7 @@ public partial class AECDMGraphQLController : ControllerBase
     {
       properties.Query = $@"
       query getElementGroupValidation($projectId: ID!) {{
-        elementGroupsByProject(projectId: $projectId, pagination:{{cursor:""{cursor}""}}) {{
+        elementGroupsByProject(projectId: $projectId, pagination:{{cursor:""{cursor}"", limit:10}}) {{
           pagination{{
             pageSize
             cursor

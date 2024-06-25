@@ -28,7 +28,7 @@ In case your elementgroup is not in the first response and you receive a cursor 
 Query used in case no cursor is provided:
 
 ```
-elementGroupsByProject(projectId: $projectId) {
+elementGroupsByProject(projectId: $projectId, pagination:{limit:10}) {
   pagination{
     pageSize
     cursor
@@ -51,7 +51,7 @@ elementGroupsByProject(projectId: $projectId) {
 Query used in case a valid cursor is provided:
 
 ```
-elementGroupsByProject(projectId: $projectId, pagination:{cursor:"cursor string here"}) {
+elementGroupsByProject(projectId: $projectId, pagination:{cursor:"cursor string here", limit:10}) {
   pagination{
     pageSize
     cursor

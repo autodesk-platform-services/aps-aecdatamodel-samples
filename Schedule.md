@@ -23,7 +23,7 @@ In case your project is not in the first response and you receive a cursor value
 This step uses `projectId`. Take note of the `elementGroupId` of the desired file (in this image, `House.rvt`). [See C# code](/Controllers/ElementGroups.cs).
 In case your elementgroup is not in the first response and you receive a cursor value different that `null`, you can copy and paste this value inside the cursor input and click List all elementgroups button once more.
 
-![Step 3](./images/designs.png)
+![Step 3](./images/elementgroups.png)
 
 ## Step 4: Generate Schedule
 
@@ -49,8 +49,10 @@ query GetSchedule($elementGroupId: ID!, $elementsfilter: String!){
           name
           value
           displayValue
-          propertyDefinition{
-            units
+          definition{
+            units{
+              name
+            }
           }
         }
       }
