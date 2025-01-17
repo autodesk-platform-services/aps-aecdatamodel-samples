@@ -6,7 +6,7 @@ using System;
 public partial class AECDMGraphQLController : ControllerBase
 {
 	[HttpGet("elementgroups/{elementGroupId}/schedule/{elementsfilter}")]
-	public async Task<ActionResult<string>> GetSchedule(string elementGroupId, string elementsfilter, string? cursor)
+	public async Task<ActionResult<string>> GetSchedule(string elementGroupId, string elementsfilter, string? cursor, string? regionHeader)
 	{
 		var properties = new GraphQLRequest
 		{
@@ -108,6 +108,6 @@ public partial class AECDMGraphQLController : ControllerBase
 			}}";
 		}
 
-		return await Query(properties);
+		return await Query(properties, regionHeader);
 	}
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 public partial class AECDMGraphQLController : ControllerBase
 {
     [HttpGet("hubs")]
-    public async Task<ActionResult<string>> GetHubs(string? cursor)
+    public async Task<ActionResult<string>> GetHubs(string? cursor, string? regionHeader)
     {
         var properties = new GraphQLRequest
         {
@@ -40,11 +40,11 @@ public partial class AECDMGraphQLController : ControllerBase
                 }}";
         }
 
-        return await Query(properties);
+        return await Query(properties, regionHeader);
     }
 
     [HttpGet("hubs/{hubid}/projects")]
-    public async Task<ActionResult<string>> GetProjects(string hubId, string? cursor)
+    public async Task<ActionResult<string>> GetProjects(string hubId, string? cursor, string? regionHeader)
     {
         var properties = new GraphQLRequest
         {
@@ -81,6 +81,6 @@ public partial class AECDMGraphQLController : ControllerBase
 			    }}";
         }
 
-        return await Query(properties);
+        return await Query(properties, regionHeader);
     }
 }

@@ -6,7 +6,7 @@ using System;
 public partial class AECDMGraphQLController : ControllerBase
 {
     [HttpGet("projects/{projectId}/elementgroups")]
-    public async Task<ActionResult<string>> GetElementGroups(string projectId, string? cursor)
+    public async Task<ActionResult<string>> GetElementGroups(string projectId, string? cursor, string? regionHeader)
     {
         var properties = new GraphQLRequest
         {
@@ -43,6 +43,6 @@ public partial class AECDMGraphQLController : ControllerBase
                 }}";
         }
 
-        return await Query(properties);
+        return await Query(properties, regionHeader);
     }
 }
